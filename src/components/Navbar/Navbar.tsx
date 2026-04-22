@@ -17,7 +17,7 @@ interface NavbarProps {
   logoTextSrc?: string;
   /** Which nav item is active — defaults to location pathname matching */
   activePath?: string;
-  /** CTA label (default "Contact") */
+  /** CTA label (default "Join the Community") */
   ctaLabel?: string;
   /** CTA click handler */
   onCtaClick?: () => void;
@@ -27,7 +27,7 @@ export const Navbar = ({
   logoSrc,
   logoTextSrc,
   activePath,
-  ctaLabel = "Contact",
+  ctaLabel = "Join the Community",
   onCtaClick,
 }: NavbarProps): JSX.Element => {
   const navigate = useNavigate();
@@ -49,26 +49,11 @@ export const Navbar = ({
         className="all-[unset] box-border cursor-pointer flex-shrink-0"
         aria-label="Go to home"
       >
-        {logoSrc ? (
-          <div
-            className="w-[61px] h-12 bg-[100%_100%] flex flex-col justify-start"
-            style={{ backgroundImage: `url(${logoSrc})` }}
-          >
-            {logoTextSrc && (
-              <img
-                className="mt-[38px] w-[61px] h-2.5"
-                alt="ICS Global"
-                src={logoTextSrc}
-              />
-            )}
-          </div>
-        ) : (
-          <img
-            className="w-[61px] h-12 object-contain"
-            alt="ICS Global"
-            src="https://c.animaapp.com/nj999vRB/img/ics-png-1@4x.png"
-          />
-        )}
+        <img
+          className="h-12 w-auto object-contain"
+          alt="ICS Global"
+          src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776850331288-0.png"
+        />
       </button>
 
       {/* Desktop Nav pill — matches Figma exactly: h-[52px], px-4, py-3.5, gap-8, rounded-[10px] */}
@@ -139,9 +124,9 @@ export const Navbar = ({
               aria-label="Go to home"
             >
               <img
-                className="w-[61px] h-12 object-contain"
+                className="h-12 w-auto object-contain"
                 alt="ICS Global"
-                src="https://c.animaapp.com/nj999vRB/img/ics-png-1@4x.png"
+                src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776850331288-0.png"
               />
             </button>
             {/* X close button */}

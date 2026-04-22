@@ -6,9 +6,10 @@ export const Box = (): JSX.Element => {
       aria-label="Decorative banner"
     >
       <img
-        className="absolute inset-0 w-full h-full object-cover"
-        alt="Clip path group"
-        src="https://c.animaapp.com/mo8kjxi6w6GxCH/img/clip-path-group.png"
+        className="fixed inset-0 w-full h-full object-cover"
+        alt=""
+        aria-hidden="true"
+        src="https://c.animaapp.com/mo9tbehwSBR47T/img/clip-path-group.png"
       />
     </section>
   );

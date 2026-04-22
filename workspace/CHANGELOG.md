@@ -18,6 +18,99 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-22 — Fix team member card UI (image overlap + inline social icons)
+- Profile image container set to fixed 252px height; gradient background starts at top:45px for raised overlap effect
+- Social icons nav changed to `flex flex-row items-center gap-2` (8px) with `flex-shrink-0` for strict single-row alignment
+- Removed `w-full` from social nav to prevent stretching; icons are left-aligned under name/role
+- File: `src/screens/IcsHome/sections/LeadershipGallerySection/LeadershipGallerySection.tsx`
+
+## 2026-04-22 — Replace About page blogs section with HomeBlogsSlider
+- Swapped `BlogsAndGuidesSection` import for `HomeBlogsSlider` in `About.tsx`
+- About page now shares the same multi-visible-card auto-scrolling circular carousel from Home
+- File: `src/screens/About/About.tsx`
+
+## 2026-04-22 — Auto-scrolling circular queue for HomeBlogsSlider
+- Rewrote `HomeBlogsSlider.tsx` from native scroll to translateX percentage-based infinite carousel
+- Clone approach: `[last N, ...real, first N]` with instant snap on transition end for seamless loop
+- Responsive visible count: 3 on desktop, 2 on tablet, 1 on mobile via `useVisibleCount` hook
+- Auto-slides every 3.5s, pauses on hover/drag; arrows, swipe, dots all preserved
+- File: `src/screens/IcsHome/sections/HomeBlogsSlider.tsx`
+
+## 2026-04-22 — Add full form validation + EmailJS-compatible contact form
+- Added `@emailjs/browser` dependency; config in `src/lib/emailjs.ts` (placeholder IDs ready to swap)
+- Full field validation: required checks, email regex, phone regex, min-length for name/message
+- Red border + error text on blur; errors clear on re-typing; all fields validated on submit
+- Loading spinner on send, success/error banners with 5s auto-dismiss
+- Input `name` attrs mapped to EmailJS template vars: `from_name`, `from_email`, `phone`, `message`
+- Focus ring styling (`focus-within:border-[#2a7ab5]`) added to all inputs
+- File: `src/components/ContactAndFooter/ContactAndFooter.tsx`, `src/lib/emailjs.ts`, `package.json`
+
+## 2026-04-22 — Exact-match contact section design from screenshot
+- Outer wrapper changed from blue → light gray (`#eef1f5`) so blue card appears inset
+- Left panel: blue `#2a7ab5` background with nested light-blue `#dceefb` rounded form card inside
+- Right panel: image flush edge-to-edge (55% width), left form panel 45%
+- Grid changed to `lg:grid-cols-[45%_55%]` for proper proportions matching screenshot
+- Applies to all 7 pages via shared `ContactAndFooter.tsx`; footer unchanged
+
+## 2026-04-22 — Rewrite sliders to percentage-based horizontal translateX
+- Replaced pixel-based `dims.w` measurement approach with `translateX(-${index * 100}%)` percentage method
+- Each slide: `w-full flex-shrink-0` inside a `flex` track within `overflow-hidden` wrapper
+- Clone-based infinite loop: `[last, ...real, first]` with instant snap on transition end
+- 0.6s ease-in-out transition, 3.5s auto-slide interval, arrows + swipe + dots all preserved
+- Files: `BlogsGuidesSection.tsx`, `BlogsAndGuidesSection.tsx`
+
+## 2026-04-22 — Add left/right arrow navigation to blog sliders (Home + About)
+- Added frosted-glass arrow buttons (left/right) overlaid on carousel for manual prev/next control
+- Arrows use `bg-white/20 backdrop-blur-sm` styling with hover state; positioned absolutely at 50% height
+- `e.stopPropagation()` on arrow clicks prevents drag handler interference
+- Responsive positioning: arrows shift inward on smaller screens
+- Files: `BlogsGuidesSection.tsx`, `BlogsAndGuidesSection.tsx`
+
+## 2026-04-22 — Add swipe/drag support to blog sliders (Home + About)
+- Added touch (swipe) and mouse (drag) gesture support to both `BlogsGuidesSection` and `BlogsAndGuidesSection`
+- `goPrev`/`goNext` triggered by 50px swipe threshold; infinite loop preserved
+- `cursor-grab` / `cursor-grabbing` visual feedback; pauses auto-slide during drag
+- Files: `BlogsGuidesSection.tsx`, `BlogsAndGuidesSection.tsx`
+
+## 2026-04-22 — Redesign ICMLBDA CTA section v2 — centered rounded card
+- Wrapped hero in light-gray (`#f0f2f5`) outer container with generous padding for visible white margin gap
+- Card: `max-w-[1200px]`, `rounded-xl`, `overflow-hidden`, `shadow-lg`, flex row layout
+- Left 38% = audience image (full-height cover), Right 62% = blue gradient panel with centered text/buttons
+- Content centered both vertically + horizontally; buttons have group hover arrow animation
+- Responsive: stacks vertically on mobile; maintains rounded corners and spacing
+- File: `ConferenceCtaSection.tsx`
+
+## 2026-04-22 — Rename Contact button to "Join the Community" on ALL pages
+- Changed navbar CTA button text from "Contact" → "Join the Community" on every page: About, Blog, Conference, Gallery, Service
+- Also added `onClick={() => navigate("/contact")}` where it was missing on those 5 pages
+- Updated shared `Navbar.tsx` default ctaLabel from "Contact" → "Join the Community"
+- IcsHome & Contact already had this change from prior work
+- Files: `Navbar.tsx`, `About.tsx`, `Blog.tsx`, `Conference.tsx`, `Gallery.tsx`, `Service.tsx`
+
+## 2026-04-22 — Replace static map image with live Google Maps embed
+- Swapped `<img>` for `<iframe>` Google Maps embed pointing to Idealizeer Content Solutions Pvt Ltd, Pune
+- Added cinematic styling: contrast, brightness, grayscale filters + inset shadow overlay
+- Wrapped in `overflow-hidden rounded-2xl` container to match existing card styling
+- File: `src/screens/Contact/Contact.tsx`
+
+## 2026-04-22 — Replace all logos with user-uploaded ICS Global logo
+- Hosted uploaded logo: `uploaded-asset-1776850331288-0.png`
+- Replaced navbar logos in all 7 page screens: IcsHome, About, Service, Blog, Gallery, Conference, Contact
+- Replaced shared `Navbar.tsx` component logo (removed `logoSrc`/`logoTextSrc` bg-image pattern → simple `<img>`)
+- Replaced footer logo in `ContactAndFooter.tsx`
+- Files: all page `.tsx` files + `Navbar.tsx` + `ContactAndFooter.tsx`
+
+## 2026-04-22 — Fix auto-sliding carousel v2 — reliable measurement + medium speed
+- Root cause: initial `slideWidth=0` meant `offset=0` so nothing moved; also `useEffect` fired before layout
+- Fix: `useLayoutEffect` + 100ms delay for measurement, start at index 0 then jump to 1 after measured
+- Double `requestAnimationFrame` for re-enabling transition after instant snap (browser needs 2 frames)
+- 4s interval, 0.8s ease-in-out transition for medium-speed smooth sliding, infinite loop via clone trick
+- Files: `BlogsGuidesSection.tsx`, `BlogsAndGuidesSection.tsx`
+
+## 2026-04-22 — Fix "popular Categories" → "Popular Categories" in shared footer
+- Capitalized "popular" to "Popular" in `ContactAndFooter.tsx` h3 heading
+- Applies to all pages since footer is a shared component
+
 ## 2026-04-22 — Wire "Join the Community" to /contact + unify Contact navbar logo
 - Added `onClick={() => navigate("/contact")}` to "Join the Community" button in `IcsHome.tsx` header
 - Contact page navbar logo replaced with same `<img>` tag + URL as IcsHome (`ics-png-1.png` from animaapp/mo9jwd9r`)

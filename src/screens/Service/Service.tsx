@@ -53,13 +53,11 @@ export const Service = (): JSX.Element => {
             className="all-[unset] box-border cursor-pointer flex-shrink-0"
             aria-label="Go to home"
           >
-            <div className="w-[61px] h-12 bg-[url(https://c.animaapp.com/mo863n0tfCwuCJ/img/ics-png-1.png)] bg-[100%_100%] flex flex-col justify-start">
-              <img
-                className="mt-[38px] w-[61px] h-2.5"
-                alt="ICS logo text"
-                src="https://c.animaapp.com/mo863n0tfCwuCJ/img/ics-png-2.png"
-              />
-            </div>
+            <img
+              className="h-12 w-auto object-contain"
+              alt="ICS Global logo"
+              src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776850331288-0.png"
+            />
           </button>
 
           {/* Nav pill */}
@@ -90,10 +88,11 @@ export const Service = (): JSX.Element => {
           {/* Contact CTA — hidden on mobile */}
           <button
             type="button"
+            onClick={() => navigate("/contact")}
             className="all-[unset] box-border hidden md:inline-flex items-center justify-center gap-2 h-12 px-5 py-3 bg-primary-1 rounded-lg border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
           >
             <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
-              Contact
+              Join the Community
             </span>
           </button>
 
@@ -124,9 +123,11 @@ export const Service = (): JSX.Element => {
                 className="cursor-pointer"
                 aria-label="Go to home"
               >
-                <div className="w-[61px] h-12 bg-[url(https://c.animaapp.com/mo863n0tfCwuCJ/img/ics-png-1.png)] bg-[100%_100%] flex flex-col justify-start">
-                  <img className="mt-[38px] w-[61px] h-2.5" alt="ICS logo" src="https://c.animaapp.com/mo863n0tfCwuCJ/img/ics-png-2.png" />
-                </div>
+                <img
+                  className="h-12 w-auto object-contain"
+                  alt="ICS Global logo"
+                  src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776850331288-0.png"
+                />
               </button>
               <button
                 type="button"

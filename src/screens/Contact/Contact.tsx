@@ -39,9 +39,9 @@ export const Contact = (): JSX.Element => {
             aria-label="Go to home"
           >
             <img
-              className="w-[61px] h-12"
+              className="h-12 w-auto object-contain"
               alt="ICS Global logo"
-              src="https://c.animaapp.com/mo9jwd9rECorqJ/img/ics-png-1.png"
+              src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776850331288-0.png"
             />
           </button>
 
@@ -69,7 +69,7 @@ export const Contact = (): JSX.Element => {
             className="all-[unset] box-border hidden md:inline-flex items-center justify-center gap-2 h-12 px-5 py-3 bg-primary-1 rounded-lg border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
           >
             <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
-              Contact
+              Join the Community
             </span>
           </button>
 
@@ -96,9 +96,9 @@ export const Contact = (): JSX.Element => {
             <div className="flex items-center justify-between px-6 pt-6 pb-4">
               <button type="button" onClick={() => { navigate("/"); setMenuOpen(false); }} className="cursor-pointer" aria-label="Go to home">
                 <img
-                  className="w-[61px] h-12 object-contain"
+                  className="h-12 w-auto object-contain"
                   alt="ICS Global logo"
-                  src="https://c.animaapp.com/mo9jwd9rECorqJ/img/ics-png-1.png"
+                  src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776850331288-0.png"
                 />
               </button>
               <button type="button" aria-label="Close menu" onClick={() => setMenuOpen(false)} className="w-10 h-10 flex items-center justify-center cursor-pointer">
@@ -146,12 +146,23 @@ export const Contact = (): JSX.Element => {
       {/* ── MAP ── */}
       <section aria-label="Map preview" className="w-full bg-[#0a2a50]">
         <div className="max-w-[1728px] mx-auto px-6 md:px-16 lg:px-24 pt-10 md:pt-14">
-          <img
-            className="w-full rounded-2xl border border-solid border-gray-200 object-cover"
+          <div
+            className="relative w-full rounded-2xl border border-solid border-gray-200 overflow-hidden"
             style={{ height: "clamp(220px, 33.5vw, 644px)" }}
-            alt="Map showing Pune and surrounding area"
-            src="https://c.animaapp.com/mo9oe40uKob8r6/img/map.png"
-          />
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d50000.0!2d73.738601!3d18.5863645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bb00907081fd%3A0x5f1ba7f78fe527fe!2sIdealizeer%20Content%20Solutions%20Private%20Limited!5e0!3m2!1sen!2sin!4v1704710000000!5m2!1sen!2sin&q=18.5863645,73.738601"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="ICS Global office location"
+              className="filter contrast-[1.1] brightness-[0.9] grayscale-[0.3]"
+            />
+            <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_150px_rgba(0,0,0,0.4)] z-10" />
+          </div>
         </div>
       </section>
 

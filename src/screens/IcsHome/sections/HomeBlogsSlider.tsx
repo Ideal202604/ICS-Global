@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useRef, TouchEvent as RTE, MouseEvent as RME } from "react";
+import { useRef, useState, useEffect, useCallback, TouchEvent as RTE, MouseEvent as RME } from "react";
 
-const blogCards = [
+const homeBlogCards = [
   {
     image: "https://c.animaapp.com/mo857b66QKlwSd/img/image.png",
     imageAlt: "Classroom interior with desks and chairs",
@@ -19,104 +19,144 @@ const blogCards = [
     title: "Expanding your product business",
     description: "Explore cost-effective marketing strategies to push your product to new heights.",
   },
+  {
+    image: "https://c.animaapp.com/mo857b66QKlwSd/img/image-3.png",
+    imageAlt: "School campus building with a running track",
+    title: "Expanding your product business",
+    description: "Explore cost-effective marketing strategies to push your product to new heights.",
+  },
 ];
 
-export const BlogsAndGuidesSection = (): JSX.Element => {
-  const total = blogCards.length;
+/* ─── How many cards visible at once per breakpoint ─── */
+const useVisibleCount = () => {
+  const [count, setCount] = useState(2);
+  useEffect(() => {
+    const calc = () => {
+      const w = window.innerWidth;
+      if (w >= 1280) setCount(3);
+      else if (w >= 768) setCount(2);
+      else setCount(1);
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+  return count;
+};
+
+export const HomeBlogsSlider = (): JSX.Element => {
+  const total = homeBlogCards.length;
+  const visible = useVisibleCount();
   const [index, setIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [paused, setPaused] = useState(false);
+  const autoRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const extendedCards = [blogCards[total - 1], ...blogCards, blogCards[0]];
-  const displayIndex = index + 1;
-  const needsSnap = index >= total || index < 0;
-  const snapDisplayIndex = index >= total ? 1 : index < 0 ? total : displayIndex;
-  const showTransition = isAnimating && !needsSnap;
-  const currentDisplayIdx = needsSnap ? snapDisplayIndex : displayIndex;
+  /* ── Clone approach: [last N, ...real, first N] ── */
+  const cloneCount = visible;
+  const extendedCards = [
+    ...homeBlogCards.slice(-cloneCount),
+    ...homeBlogCards,
+    ...homeBlogCards.slice(0, cloneCount),
+  ];
+  const displayIndex = index + cloneCount;
+  const slideWidth = 100 / visible;
 
-  const goTo = useCallback((next: number) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setIndex(next);
-  }, [isAnimating]);
+  /* ── Navigation ── */
+  const goTo = useCallback(
+    (next: number) => {
+      if (isAnimating) return;
+      setIsAnimating(true);
+      setIndex(next);
+    },
+    [isAnimating]
+  );
 
-  const goNext = useCallback(() => {
-    goTo(index + 1);
-  }, [index, goTo]);
+  const goNext = useCallback(() => goTo(index + 1), [index, goTo]);
+  const goPrev = useCallback(() => goTo(index - 1), [index, goTo]);
 
-  const goPrev = useCallback(() => {
-    goTo(index - 1);
-  }, [index, goTo]);
-
-  // Auto-slide every 3.5s
+  /* ── Auto-slide ── */
   useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => {
+    if (paused) {
+      if (autoRef.current) clearInterval(autoRef.current);
+      return;
+    }
+    autoRef.current = setInterval(() => {
       setIsAnimating(true);
       setIndex((prev) => prev + 1);
     }, 3500);
-    return () => clearInterval(id);
+    return () => {
+      if (autoRef.current) clearInterval(autoRef.current);
+    };
   }, [paused]);
 
-  // Infinite loop snap
+  /* ── Snap on transition end (infinite loop) ── */
   const handleTransitionEnd = useCallback(() => {
     setIsAnimating(false);
     setIndex((prev) => {
-      if (prev >= total) return 0;
-      if (prev < 0) return total - 1;
+      if (prev >= total) return prev - total;
+      if (prev < 0) return prev + total;
       return prev;
     });
   }, [total]);
 
-  /* ── Touch / drag support ── */
+  /* ── Touch / drag ── */
   const dragState = useRef({ startX: 0, dragging: false });
-  const SWIPE_THRESHOLD = 50;
-
-  const onPointerDown = (clientX: number) => {
-    dragState.current = { startX: clientX, dragging: true };
+  const SWIPE = 50;
+  const onDown = (x: number) => {
+    dragState.current = { startX: x, dragging: true };
     setPaused(true);
   };
-  const onPointerUp = (clientX: number) => {
+  const onUp = (x: number) => {
     if (!dragState.current.dragging) return;
     dragState.current.dragging = false;
-    const diff = dragState.current.startX - clientX;
-    if (Math.abs(diff) > SWIPE_THRESHOLD) {
-      if (diff > 0) goNext();
-      else goPrev();
+    const diff = dragState.current.startX - x;
+    if (Math.abs(diff) > SWIPE) {
+      diff > 0 ? goNext() : goPrev();
     }
     setPaused(false);
   };
 
-  const handleTouchStart = (e: RTE<HTMLDivElement>) => onPointerDown(e.touches[0].clientX);
-  const handleTouchEnd = (e: RTE<HTMLDivElement>) => onPointerUp(e.changedTouches[0].clientX);
-  const handleMouseDown = (e: RME<HTMLDivElement>) => { e.preventDefault(); onPointerDown(e.clientX); };
-  const handleMouseUp = (e: RME<HTMLDivElement>) => onPointerUp(e.clientX);
-  const handleMouseLeave = (e: RME<HTMLDivElement>) => { if (dragState.current.dragging) onPointerUp(e.clientX); setPaused(false); };
+  const handleTouchStart = (e: RTE<HTMLDivElement>) => onDown(e.touches[0].clientX);
+  const handleTouchEnd = (e: RTE<HTMLDivElement>) => onUp(e.changedTouches[0].clientX);
+  const handleMouseDown = (e: RME<HTMLDivElement>) => { e.preventDefault(); onDown(e.clientX); };
+  const handleMouseUp = (e: RME<HTMLDivElement>) => onUp(e.clientX);
+  const handleMouseLeave = (e: RME<HTMLDivElement>) => {
+    if (dragState.current.dragging) onUp(e.clientX);
+    setPaused(false);
+  };
 
+  /* ── Transition styling ── */
+  const needsSnap = index >= total || index < 0;
+  const translatePercent = displayIndex * slideWidth;
+  const transition = isAnimating && !needsSnap ? "transform 0.6s ease-in-out" : "none";
+
+  /* ── Real index for dots ── */
   const realIndex = ((index % total) + total) % total;
 
   return (
     <section
-      aria-labelledby="about-blogs-heading"
+      aria-labelledby="home-blogs-heading"
       className="w-full relative overflow-hidden"
       style={{
         paddingTop: "clamp(56px, 5.8vw, 112px)",
         paddingBottom: "clamp(48px, 4.2vw, 80px)",
       }}
     >
-      {/* Background */}
+      {/* Background SVG */}
       <img
         className="absolute inset-0 w-full h-full object-fill pointer-events-none"
         aria-hidden="true"
         alt=""
         src="https://c.animaapp.com/mo857b66QKlwSd/img/rectangle-39437.svg"
       />
+
       <div className="relative z-10">
         {/* Header */}
         <div className="max-w-[1728px] mx-auto px-6 md:px-16 lg:px-24 mb-12 md:mb-16">
           <div className="flex flex-col items-center gap-4 max-w-[768px] mx-auto text-center">
             <h2
-              id="about-blogs-heading"
+              id="home-blogs-heading"
               className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white tracking-[0.88px] leading-[54px] w-full"
               style={{ fontSize: "clamp(28px, 2.3vw, 44px)" }}
             >
@@ -133,7 +173,7 @@ export const BlogsAndGuidesSection = (): JSX.Element => {
 
         {/* Carousel */}
         <div
-          className="relative select-none cursor-grab active:cursor-grabbing"
+          className="relative select-none cursor-grab active:cursor-grabbing px-6 md:px-16 lg:px-24"
           onMouseEnter={() => { if (!dragState.current.dragging) setPaused(true); }}
           onMouseLeave={handleMouseLeave}
           onMouseDown={handleMouseDown}
@@ -146,42 +186,45 @@ export const BlogsAndGuidesSection = (): JSX.Element => {
             type="button"
             aria-label="Previous slide"
             onClick={(e) => { e.stopPropagation(); goPrev(); }}
-            className="absolute left-2 md:left-8 lg:left-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-all duration-300 shadow-lg cursor-pointer"
+            className="absolute left-1 md:left-6 lg:left-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-all duration-300 shadow-lg cursor-pointer"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
           </button>
+
           {/* Right Arrow */}
           <button
             type="button"
             aria-label="Next slide"
             onClick={(e) => { e.stopPropagation(); goNext(); }}
-            className="absolute right-2 md:right-8 lg:right-16 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-all duration-300 shadow-lg cursor-pointer"
+            className="absolute right-1 md:right-6 lg:right-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center text-white hover:bg-white/40 transition-all duration-300 shadow-lg cursor-pointer"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
           </button>
 
-          {/* Overflow wrapper */}
-          <div className="overflow-hidden mx-6 md:mx-16 lg:mx-24">
+          {/* Track */}
+          <div className="overflow-hidden">
             <div
               className="flex"
               style={{
-                transform: `translateX(-${currentDisplayIdx * 100}%)`,
-                transition: showTransition ? "transform 0.6s ease-in-out" : "none",
+                transform: `translateX(-${translatePercent}%)`,
+                transition,
               }}
               onTransitionEnd={handleTransitionEnd}
             >
               {extendedCards.map((card, i) => (
                 <div
-                  key={`blog-card-${i}`}
-                  className="w-full flex-shrink-0 px-4"
+                  key={`hb-${i}`}
+                  className="flex-shrink-0 px-3 md:px-4"
+                  style={{ width: `${slideWidth}%` }}
                 >
-                  <article className="relative flex items-start overflow-hidden rounded-2xl border border-solid border-white bg-white shadow-md max-w-[592px] mx-auto">
+                  <article className="relative flex items-start overflow-hidden rounded-2xl border border-solid border-white bg-white shadow-md h-full">
                     <img
                       className="self-stretch object-cover flex-shrink-0"
                       style={{ width: "clamp(110px, 13.5vw, 260px)" }}
                       alt={card.imageAlt}
                       src={card.image}
                       loading="lazy"
+                      draggable={false}
                     />
                     <div className="flex flex-1 flex-col items-start justify-between gap-5 p-5 md:p-8 h-full">
                       <div className="flex flex-col items-start gap-2 w-full">
@@ -214,6 +257,7 @@ export const BlogsAndGuidesSection = (): JSX.Element => {
                           alt=""
                           src="https://c.animaapp.com/mo857b66QKlwSd/img/chevron-right.svg"
                           aria-hidden="true"
+                          draggable={false}
                         />
                       </button>
                     </div>
@@ -224,13 +268,13 @@ export const BlogsAndGuidesSection = (): JSX.Element => {
           </div>
 
           {/* Dots */}
-          <div className="flex justify-center gap-2 mt-6">
-            {blogCards.map((_, i) => (
+          <div className="flex justify-center gap-2 mt-8">
+            {homeBlogCards.map((_, i) => (
               <button
                 key={`dot-${i}`}
                 type="button"
                 onClick={() => { setIsAnimating(true); setIndex(i); }}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${realIndex === i ? "bg-white scale-125" : "bg-white/40"}`}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${realIndex === i ? "bg-white scale-125" : "bg-white/40 hover:bg-white/60"}`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
