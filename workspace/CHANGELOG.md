@@ -18,20 +18,46 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
-## 2026-04-22 — SEO Setup (latest)
-- Rewrote `index.html`: title, lang, viewport, meta description/author/keywords, canonical, OG (Facebook/Twitter), JSON-LD schema (Org + WebSite + WebPage + EducationalOrg)
-- Created `static/favicon.png`, `static/apple-touch-icon.png`, `static/og-image.png` (SVG-based, no .ico)
-- Created `static/site.webmanifest`, `static/robots.txt` (Google/Bing/Perplexity allow + Sitemap URL), `static/sitemap.xml` (6 routes), `static/llms.txt`
-- `vite.config.ts` publicDir is `./static` — all static assets serve from root correctly
-- Files: `index.html`, `static/*`
+## 2026-04-22 — Wire "Join the Community" to /contact + unify Contact navbar logo
+- Added `onClick={() => navigate("/contact")}` to "Join the Community" button in `IcsHome.tsx` header
+- Contact page navbar logo replaced with same `<img>` tag + URL as IcsHome (`ics-png-1.png` from animaapp/mo9jwd9r`)
+- Also updated mobile overlay logo in Contact.tsx to match
 
-## 2026-04-22
-## 2026-04-22 — SEO Setup (latest)
-- Rewrote `index.html`: title, lang, viewport, meta description/author/keywords, canonical, OG (Facebook/Twitter), JSON-LD schema (Org + WebSite + WebPage + EducationalOrg)
-- Created `static/favicon.png`, `static/apple-touch-icon.png`, `static/og-image.png` (SVG-based, no .ico)
+## 2026-04-22 — Fix bgImg cards photo visibility in LeadershipGallerySection
+- Changed `bg-cover` → `bg-contain bg-no-repeat` + `inset: 8px` on bgImg divs so photo isn't cropped
+- Affects Dr. Arpita Kathane and Sumit Dorle cards
+- File: `src/screens/IcsHome/sections/LeadershipGallerySection/LeadershipGallerySection.tsx`
+
+## 2026-04-22 — Mobile hamburger toggle added to ALL pages
+- Added 3-white-line hamburger + full-screen blue gradient overlay to About, Service, Blog, Gallery, Conference
+- Each page highlights its own active nav item in the `bg-[#1a4f72]` pill; Connect CTA at bottom
+- Pattern: `useState(false)` for `menuOpen`, hamburger is `lg:hidden`, overlay is `fixed inset-0 z-50`
+- Files: `About.tsx`, `Service.tsx`, `Blog.tsx`, `Gallery.tsx`, `Conference.tsx`
+
+## 2026-04-22 — Fix mobile hamburger visibility in IcsHome
+- Root cause: `IcsHome.tsx` has its own inline navbar (not using `<Navbar>` component) — had NO hamburger button
+- Added `useState` import + `menuOpen` state to `IcsHome.tsx`
+- Added 3-white-line hamburger button (`lg:hidden`) next to CTA in the inline header
+- Added full-screen blue gradient overlay with white card, active pill on Home, X close, Connect CTA
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-22 — Navbar mobile menu redesign
+- Replaced simple dropdown with full-screen blue gradient overlay matching design reference
+- White rounded card with nav links; active item highlighted with `bg-[#1a4f72]` pill
+- X close button top-right, ICS logo top-left inside overlay; hamburger (3 white lines) unchanged
+- "Connect" CTA pill at bottom of white card
+- File: `src/components/Navbar/Navbar.tsx`
+
+## 2026-04-22 — SEO Fix: Correct SVG icon extensions
+- Previous session saved SVG content inside `.png` files — fixed by deleting `.png` and recreating as `.svg`
+- Updated `index.html`: favicon → `image/svg+xml`, apple-touch-icon, og:image, twitter:image, JSON-LD logo all → `.svg`
+- Updated `static/site.webmanifest`: icon entries now reference `.svg` files with correct MIME type `image/svg+xml`
+- Files: `static/favicon.svg`, `static/apple-touch-icon.svg`, `static/og-image.svg`, `index.html`, `static/site.webmanifest`
+
+## 2026-04-22 — SEO Setup (initial)
+- Wrote `index.html`: title, lang, viewport, meta description/author/keywords, canonical, OG (Facebook/Twitter), JSON-LD schema (Org + WebSite + WebPage + EducationalOrg)
 - Created `static/site.webmanifest`, `static/robots.txt` (Google/Bing/Perplexity allow + Sitemap URL), `static/sitemap.xml` (6 routes), `static/llms.txt`
 - `vite.config.ts` publicDir is `./static` — all static assets serve from root correctly
-- Files: `index.html`, `static/*`
 
 ## 2026-04-22
 - Hero About Us block: split into `lg:hidden` mobile section + `hidden lg:block` absolute desktop block — fixes overflow/collision on all breakpoints

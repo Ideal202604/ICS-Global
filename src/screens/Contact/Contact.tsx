@@ -1,16 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BrandingMarketingSection } from "./sections/BrandingMarketingSection";
-import { CorporateServicesSection } from "./sections/CorporateServicesSection";
-import { EdTechSectorSection } from "./sections/EdTechSectorSection";
-import { HeroBannerSection } from "./sections/HeroBannerSection";
-import { HigherEducationSection } from "./sections/HigherEducationSection";
-import { ItAndITeSSection } from "./sections/ItAndITeSSection";
-import { K12EducationSection } from "./sections/K12EducationSection";
-import { ManufacturingSolutionsSection } from "./sections/ManufacturingSolutionsSection";
-import { PublishingHousesSection } from "./sections/PublishingHousesSection";
-import { SignatureOfferingsIntroSection } from "./sections/SignatureOfferingsIntroSection";
-import { WhyICSGlobalSection } from "./sections/WhyICSGlobalSection";
+import { ContactHeroSection } from "./sections/ContactHeroSection";
+import { LocationMapSection } from "./sections/LocationMapSection";
+import { OutreachFormSection } from "./sections/OutreachFormSection";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -18,54 +10,44 @@ const navItems = [
   { label: "Services", path: "/services" },
   { label: "Blog", path: "/blog" },
   { label: "Gallery", path: "/gallery" },
-  { label: "Conference", path: "/" },
+  { label: "Conference", path: "/conference" },
 ] as const;
 
-export const Service = (): JSX.Element => {
+export const Contact = (): JSX.Element => {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div className="bg-white overflow-x-hidden w-full">
 
-      {/* ── HERO HEADER ── */}
-      <section className="relative w-full" style={{ height: "clamp(340px, 29.2vw, 561px)" }}>
-        {/* BG layers */}
+      {/* ── HERO ── */}
+      <section className="relative w-full overflow-hidden" style={{ minHeight: "clamp(340px, 29.2vw, 561px)" }}>
+        {/* Background */}
         <img
           className="absolute inset-0 w-full h-full object-cover object-center"
           alt=""
           aria-hidden="true"
-          src="https://c.animaapp.com/mo863n0tfCwuCJ/img/rectangle-9522.png"
-        />
-        <img
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          alt=""
-          aria-hidden="true"
-          src="https://c.animaapp.com/mo863n0tfCwuCJ/img/rectangle-9523.png"
+          src="https://c.animaapp.com/mo9oe40uKob8r6/img/rectangle-9535.svg"
         />
 
         {/* Navbar */}
         <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 md:px-16 lg:px-24 pt-6">
-          {/* Logo */}
           <button
             type="button"
             onClick={() => navigate("/")}
             className="all-[unset] box-border cursor-pointer flex-shrink-0"
             aria-label="Go to home"
           >
-            <div className="w-[61px] h-12 bg-[url(https://c.animaapp.com/mo863n0tfCwuCJ/img/ics-png-1.png)] bg-[100%_100%] flex flex-col justify-start">
-              <img
-                className="mt-[38px] w-[61px] h-2.5"
-                alt="ICS logo text"
-                src="https://c.animaapp.com/mo863n0tfCwuCJ/img/ics-png-2.png"
-              />
-            </div>
+            <img
+              className="w-[61px] h-12"
+              alt="ICS Global logo"
+              src="https://c.animaapp.com/mo9jwd9rECorqJ/img/ics-png-1.png"
+            />
           </button>
 
-          {/* Nav pill */}
           <nav
             aria-label="Primary navigation"
-            className="hidden lg:inline-flex items-center gap-6 xl:gap-10 bg-white rounded-[10px] border border-solid border-gray-200 shadow-shadow-sm px-4 py-3.5"
+            className="hidden lg:inline-flex items-center gap-8 xl:gap-10 bg-white rounded-[10px] border border-solid border-gray-200 shadow-shadow-sm px-4 py-3.5"
           >
             {navItems.map((item) => (
               <button
@@ -74,22 +56,16 @@ export const Service = (): JSX.Element => {
                 onClick={() => navigate(item.path)}
                 className="all-[unset] box-border cursor-pointer"
               >
-                <span
-                  className={`[font-family:'Poppins',Helvetica] text-base leading-6 tracking-[0] whitespace-nowrap ${
-                    item.label === "Services"
-                      ? "font-semibold text-primary-1"
-                      : "font-medium text-primary-3"
-                  }`}
-                >
+                <span className="[font-family:'Poppins',Helvetica] font-medium text-primary-3 text-base leading-6 tracking-[0] whitespace-nowrap">
                   {item.label}
                 </span>
               </button>
             ))}
           </nav>
 
-          {/* Contact CTA — hidden on mobile */}
           <button
             type="button"
+            onClick={() => navigate("/contact")}
             className="all-[unset] box-border hidden md:inline-flex items-center justify-center gap-2 h-12 px-5 py-3 bg-primary-1 rounded-lg border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
           >
             <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
@@ -118,22 +94,14 @@ export const Service = (): JSX.Element => {
             style={{ background: "linear-gradient(160deg, #29a8e0 0%, #1a6fa8 60%, #0e2a47 100%)" }}
           >
             <div className="flex items-center justify-between px-6 pt-6 pb-4">
-              <button
-                type="button"
-                onClick={() => { navigate("/"); setMenuOpen(false); }}
-                className="cursor-pointer"
-                aria-label="Go to home"
-              >
-                <div className="w-[61px] h-12 bg-[url(https://c.animaapp.com/mo863n0tfCwuCJ/img/ics-png-1.png)] bg-[100%_100%] flex flex-col justify-start">
-                  <img className="mt-[38px] w-[61px] h-2.5" alt="ICS logo" src="https://c.animaapp.com/mo863n0tfCwuCJ/img/ics-png-2.png" />
-                </div>
+              <button type="button" onClick={() => { navigate("/"); setMenuOpen(false); }} className="cursor-pointer" aria-label="Go to home">
+                <img
+                  className="w-[61px] h-12 object-contain"
+                  alt="ICS Global logo"
+                  src="https://c.animaapp.com/mo9jwd9rECorqJ/img/ics-png-1.png"
+                />
               </button>
-              <button
-                type="button"
-                aria-label="Close menu"
-                onClick={() => setMenuOpen(false)}
-                className="w-10 h-10 flex items-center justify-center cursor-pointer"
-              >
+              <button type="button" aria-label="Close menu" onClick={() => setMenuOpen(false)} className="w-10 h-10 flex items-center justify-center cursor-pointer">
                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <line x1="4" y1="4" x2="24" y2="24" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
                   <line x1="24" y1="4" x2="4" y2="24" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
@@ -142,7 +110,7 @@ export const Service = (): JSX.Element => {
             </div>
             <div className="mx-4 mt-4 bg-white rounded-2xl flex flex-col overflow-hidden shadow-xl">
               {navItems.map((item) => {
-                const isActive = item.label === "Services";
+                const isActive = item.label === "Contact";
                 return (
                   <button
                     key={item.label}
@@ -171,38 +139,29 @@ export const Service = (): JSX.Element => {
           </div>
         )}
 
-        {/* Hero heading centred */}
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 pt-[84px]">
-          <h1 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-[#0957a1] text-[32px] md:text-[44px] tracking-[0.88px] leading-[72px] text-center">
-            Our Capabilities for Institutional Transformation
-          </h1>
+        {/* Hero content */}
+        <ContactHeroSection />
+      </section>
+
+      {/* ── MAP ── */}
+      <section aria-label="Map preview" className="w-full bg-[#0a2a50]">
+        <div className="max-w-[1728px] mx-auto px-6 md:px-16 lg:px-24 pt-10 md:pt-14">
           <img
-            className="w-44 h-1.5"
-            alt=""
-            aria-hidden="true"
-            src="https://c.animaapp.com/mo863n0tfCwuCJ/img/line.svg"
+            className="w-full rounded-2xl border border-solid border-gray-200 object-cover"
+            style={{ height: "clamp(220px, 33.5vw, 644px)" }}
+            alt="Map showing Pune and surrounding area"
+            src="https://c.animaapp.com/mo9oe40uKob8r6/img/map.png"
           />
         </div>
       </section>
 
-      {/* ── SIGNATURE OFFERINGS intro ── */}
-      <HeroBannerSection />
+      {/* ── CONTACT INFO CARDS ── */}
+      <section className="w-full bg-[#0a2a50]">
+        <LocationMapSection />
+      </section>
 
-      {/* ── SERVICE SECTIONS (alternating image/text) ── */}
-      <SignatureOfferingsIntroSection />
-      <K12EducationSection />
-      <HigherEducationSection />
-      <EdTechSectorSection />
-      <PublishingHousesSection />
-      <CorporateServicesSection />
-      <ManufacturingSolutionsSection />
-      <ItAndITeSSection />
-
-      {/* ── WHY ICS GLOBAL + photo ── */}
-      <BrandingMarketingSection />
-
-      {/* ── CONTACT + FOOTER ── */}
-      <WhyICSGlobalSection />
+      {/* ── CONTACT FORM + FOOTER ── */}
+      <OutreachFormSection />
     </div>
   );
 };

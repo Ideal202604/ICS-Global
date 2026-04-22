@@ -98,8 +98,8 @@ const MemberCard = ({ name, role, imgSrc, bgImg }: MemberCardProps) => (
       )}
       {bgImg && (
         <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${bgImg})` }}
+          className="absolute inset-0 bg-contain bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${bgImg})`, inset: '8px' }}
         />
       )}
     </div>

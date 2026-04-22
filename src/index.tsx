@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { About } from "./screens/About";
+import { Contact } from "./screens/Contact";
 import { Blog } from "./screens/Blog";
 import { Box } from "./screens/Box";
 import { Gallery } from "./screens/Gallery";
@@ -18,6 +19,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/box" element={<Box />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

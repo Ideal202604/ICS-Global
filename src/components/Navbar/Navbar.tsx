@@ -123,36 +123,82 @@ export const Navbar = ({
         <span className={`block w-6 h-0.5 bg-white transition-transform duration-300 ${menuOpen ? "-translate-y-2 -rotate-45" : ""}`} />
       </button>
 
-      {/* Mobile dropdown */}
+      {/* Mobile full-screen overlay menu */}
       {menuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg z-30 py-4 px-6 flex flex-col gap-2">
-          {navItems.map((item) => (
+        <div
+          className="lg:hidden fixed inset-0 z-50 flex flex-col"
+          style={{ background: "linear-gradient(160deg, #29a8e0 0%, #1a6fa8 60%, #0e2a47 100%)" }}
+        >
+          {/* Top bar inside overlay */}
+          <div className="flex items-center justify-between px-6 pt-6 pb-4">
+            {/* Logo */}
             <button
-              key={item.label}
               type="button"
-              onClick={() => { navigate(item.path); setMenuOpen(false); }}
-              className="all-[unset] box-border cursor-pointer py-2.5 border-b border-gray-100 last:border-0"
+              onClick={() => { navigate("/"); setMenuOpen(false); }}
+              className="all-[unset] box-border cursor-pointer"
+              aria-label="Go to home"
             >
-              <span
-                className={`[font-family:'Poppins',Helvetica] text-base leading-6 tracking-[0] ${
-                  isActive(item.path)
-                    ? "font-semibold text-primary-1"
-                    : "font-medium text-primary-3"
-                }`}
-              >
-                {item.label}
-              </span>
+              <img
+                className="w-[61px] h-12 object-contain"
+                alt="ICS Global"
+                src="https://c.animaapp.com/nj999vRB/img/ics-png-1@4x.png"
+              />
             </button>
-          ))}
-          <button
-            type="button"
-            onClick={() => { onCtaClick?.(); setMenuOpen(false); }}
-            className="all-[unset] box-border mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 bg-primary-1 rounded-lg border border-solid border-white cursor-pointer"
-          >
-            <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
-              {ctaLabel}
-            </span>
-          </button>
+            {/* X close button */}
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMenuOpen(false)}
+              className="all-[unset] box-border cursor-pointer w-10 h-10 flex items-center justify-center"
+            >
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="4" y1="4" x2="24" y2="24" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
+                <line x1="24" y1="4" x2="4" y2="24" stroke="white" strokeWidth="2.8" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </div>
+
+          {/* White card with nav links */}
+          <div className="mx-4 mt-4 bg-white rounded-2xl flex flex-col overflow-hidden shadow-xl">
+            {navItems.map((item) => (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => { navigate(item.path); setMenuOpen(false); }}
+                aria-current={isActive(item.path) ? "page" : undefined}
+                className="all-[unset] box-border cursor-pointer w-full"
+              >
+                <div
+                  className={`px-7 py-5 text-left ${
+                    isActive(item.path)
+                      ? "bg-[#1a4f72] rounded-xl mx-2 my-2"
+                      : "mx-2 my-1"
+                  }`}
+                >
+                  <span
+                    className={`[font-family:'Poppins',Helvetica] text-xl font-bold leading-tight tracking-[0] ${
+                      isActive(item.path) ? "text-white" : "text-[#555f6d]"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+                </div>
+              </button>
+            ))}
+
+            {/* Connect / CTA button inside card */}
+            <div className="px-4 py-4 mt-1">
+              <button
+                type="button"
+                onClick={() => { onCtaClick?.(); setMenuOpen(false); }}
+                className="all-[unset] box-border w-full cursor-pointer flex items-center justify-center py-5 bg-[#1a4f72] rounded-xl"
+              >
+                <span className="[font-family:'Poppins',Helvetica] font-bold text-white text-xl leading-tight tracking-[0]">
+                  Connect
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </header>
