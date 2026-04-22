@@ -1,0 +1,344 @@
+import { useNavigate } from "react-router-dom";
+import { CampusExperienceSection } from "./sections/CampusExperienceSection";
+import { ConferenceCtaSection } from "./sections/ConferenceCtaSection";
+import { ConferenceHighlightSection } from "./sections/ConferenceHighlightSection";
+import { ContactSupportSection } from "./sections/ContactSupportSection";
+import { LeadershipGallerySection } from "./sections/LeadershipGallerySection";
+import { SolutionsGridSection } from "./sections/SolutionsGridSection";
+
+const navItems = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "Services", path: "/services" },
+  { label: "Blog", path: "/blog" },
+  { label: "Gallery", path: "/gallery" },
+  { label: "Conference", path: "/" },
+];
+
+export const IcsHome = (): JSX.Element => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="bg-white overflow-x-hidden w-full">
+
+      {/* ══════════════════════════════════════
+          HERO + ABOUT — single full-bleed background
+          Figma: 1920×1725px background image covering
+          both the hero text (top-centre) and the
+          About section (bottom-right ~1195px from top)
+          ══════════════════════════════════════ */}
+      <section
+        id="home"
+        className="relative w-full overflow-hidden"
+        style={{ minHeight: "clamp(600px, 89.8vw, 1725px)" }}
+      >
+        {/* Full background image */}
+        <img
+          className="absolute inset-0 w-full h-full object-cover object-top"
+          alt="Hero background"
+          src="https://c.animaapp.com/mo9jwd9rECorqJ/img/group-40124.png"
+        />
+
+        {/* ── Navbar ── */}
+        <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 md:px-16 lg:px-24 py-5 lg:py-[26px]">
+          {/* Logo */}
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+            className="all-[unset] box-border cursor-pointer flex-shrink-0"
+            aria-label="Go to home"
+          >
+            <img
+              className="w-[61px] h-12"
+              alt="ICS Global logo"
+              src="https://c.animaapp.com/mo9jwd9rECorqJ/img/ics-png-1.png"
+            />
+          </button>
+
+          {/* Nav pill */}
+          <nav
+            aria-label="Primary navigation"
+            className="hidden lg:inline-flex items-center gap-8 xl:gap-10 bg-white rounded-[10px] border border-solid border-gray-200 shadow-shadow-sm px-4 py-3.5"
+          >
+            {navItems.map((item, i) => (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => navigate(item.path)}
+                className="all-[unset] box-border cursor-pointer"
+              >
+                <span
+                  className={`[font-family:'Poppins',Helvetica] text-base leading-6 tracking-[0] whitespace-nowrap ${
+                    i === 0
+                      ? "font-semibold text-primary-1"
+                      : "font-medium text-primary-3"
+                  }`}
+                >
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </nav>
+
+          {/* CTA button */}
+          <button
+            type="button"
+            className="all-[unset] box-border hidden md:inline-flex items-center justify-center gap-2 h-12 px-5 py-3 bg-primary-1 rounded-lg border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
+          >
+            <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
+              Join the Community
+            </span>
+          </button>
+        </header>
+
+        {/* ── Hero content — centred in the upper portion ── */}
+        <div
+          className="absolute inset-x-0 z-10 flex flex-col items-center text-center px-4"
+          style={{ top: "clamp(130px, 14.5vw, 280px)" }}
+        >
+          <div className="flex flex-col items-center gap-6 relative max-w-[768px] mx-auto">
+            {/* Heading */}
+            <div className="relative w-full">
+              <h1 className="[-webkit-text-stroke:1px_#ffffff] [font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-4xl md:text-5xl lg:text-6xl text-center tracking-[1.20px] leading-tight lg:leading-[72px]">
+                Education Reimagined for a Changing World
+              </h1>
+              <img
+                className="absolute hidden md:block"
+                style={{ top: "70px", left: "20px", width: "282px", height: "6px" }}
+                alt=""
+                aria-hidden="true"
+                src="https://c.animaapp.com/mo9jwd9rECorqJ/img/line.png"
+              />
+            </div>
+            {/* Subheading */}
+            <p className="[font-family:'Poppins',Helvetica] font-normal text-white text-base md:text-lg text-center tracking-[0] leading-7">
+              Powered by Intelligence, Guided by Purpose
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-8">
+            <button
+              type="button"
+              className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#0e467a] rounded-lg overflow-hidden border border-solid border-white cursor-pointer hover:bg-[#0a3560] transition-colors"
+            >
+              <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base md:text-lg text-center leading-6 whitespace-nowrap">
+                Explore Our Impact
+              </span>
+              <img
+                className="w-5 h-5"
+                alt=""
+                aria-hidden="true"
+                src="https://c.animaapp.com/mo9jwd9rECorqJ/img/arrow-up-left.svg"
+              />
+            </button>
+          </div>
+        </div>
+
+          {/* ── About section ──
+            Desktop (lg+): absolutely anchored to bottom-right inside the hero background.
+            Mobile/tablet: flows below hero content, full-width, inside the same section. */}
+
+        {/* DESKTOP — absolute bottom-right */}
+        <div
+          id="about"
+          className="hidden lg:block absolute z-10 right-0 px-24"
+          style={{ bottom: "clamp(40px, 8vw, 120px)", maxWidth: "650px" }}
+        >
+          <div className="flex flex-col items-start gap-4">
+            <div className="flex flex-col items-start gap-2">
+              <p className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6">
+                About Us
+              </p>
+              <h2 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-[44px] tracking-[0.88px] leading-[54px]">
+                Welcome To<br />ICS GLOBAL
+              </h2>
+            </div>
+            <p className="[font-family:'Poppins',Helvetica] font-normal text-lg leading-7">
+              <span className="text-[#eeeeee]">Idealizeer Content Solutions Private Limited (ICS Global) is an AI-enabled ecosystem driving{" "}</span>
+              <span className="font-medium text-white">quality education, community development, and sustainable institutional growth</span>
+              <span className="text-[#eeeeee]">{" "}for a rapidly evolving world. At ICS Global, we believe that the future of institutions lies at the intersection of human insight and artificial intelligence. Founded a decade ago, we operate at the intersection of education, industry, and technology — co-creating learning experiences that prepare learners for tomorrow&#39;s opportunities while advancing each partner university&#39;s strategic vision.</span>
+            </p>
+            <button
+              type="button"
+              className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-3.5 py-3 bg-primary-1 rounded-lg overflow-hidden border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
+                Partner for Transformation
+              </span>
+              <img className="w-5 h-5" alt="" aria-hidden="true" src="https://c.animaapp.com/mo9jwd9rECorqJ/img/arrow-up-left.svg" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* MOBILE / TABLET — flows as its own section below the hero, same background colour */}
+      <section
+        id="about"
+        className="lg:hidden w-full bg-[#0e2a47] px-6 md:px-16 py-10"
+      >
+        <div className="flex flex-col items-start gap-5 max-w-2xl mx-auto">
+          <div className="flex flex-col items-start gap-2">
+            <p className="[font-family:'Poppins',Helvetica] font-medium text-white text-sm leading-6">
+              About Us
+            </p>
+            <h2 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-3xl md:text-[38px] tracking-[0.88px] leading-tight">
+              Welcome To<br />ICS GLOBAL
+            </h2>
+          </div>
+          <p className="[font-family:'Poppins',Helvetica] font-normal text-sm md:text-base leading-7">
+            <span className="text-[#eeeeee]">Idealizeer Content Solutions Private Limited (ICS Global) is an AI-enabled ecosystem driving{" "}</span>
+            <span className="font-medium text-white">quality education, community development, and sustainable institutional growth</span>
+            <span className="text-[#eeeeee]">{" "}for a rapidly evolving world. At ICS Global, we believe that the future of institutions lies at the intersection of human insight and artificial intelligence. Founded a decade ago, we operate at the intersection of education, industry, and technology — co-creating learning experiences that prepare learners for tomorrow&#39;s opportunities while advancing each partner university&#39;s strategic vision.</span>
+          </p>
+          <button
+            type="button"
+            className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-4 py-3 bg-primary-1 rounded-lg overflow-hidden border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
+          >
+            <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-sm leading-6 whitespace-nowrap">
+              Partner for Transformation
+            </span>
+            <img className="w-5 h-5" alt="" aria-hidden="true" src="https://c.animaapp.com/mo9jwd9rECorqJ/img/arrow-up-left.svg" />
+          </button>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          SOLUTIONS WE DELIVER
+          ══════════════════════════════════════ */}
+      <section className="relative w-full overflow-hidden">
+        <img
+          className="absolute inset-0 w-full h-full object-cover object-center z-0"
+          alt=""
+          aria-hidden="true"
+          src="https://c.animaapp.com/nj999vRB/img/rectangle-39435.svg"
+        />
+        <div className="relative z-10 max-w-[1728px] mx-auto px-6 md:px-16 lg:px-24 py-14 md:py-20">
+          <div className="flex flex-col items-center gap-3 mb-10">
+            <h2 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-black text-3xl md:text-[44px] text-center tracking-[0.88px] leading-[54px]">
+              Solutions We Deliver
+            </h2>
+            <p className="[font-family:'Poppins',Helvetica] font-normal text-primary-3 text-base md:text-lg text-center leading-7">
+              Empowering growth through intelligent, scalable solutions.
+            </p>
+          </div>
+          <SolutionsGridSection />
+          <div className="flex justify-center mt-10">
+            <button
+              type="button"
+              className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#0e467a] rounded-lg border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
+                See More
+              </span>
+              <img className="w-5 h-5" alt="" aria-hidden="true" src="https://c.animaapp.com/nj999vRB/img/arrow-up-left-4.svg" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          MEET OUR TEAM
+          ══════════════════════════════════════ */}
+      <section className="relative w-full overflow-hidden">
+        <img
+          className="absolute inset-0 w-full h-full object-cover object-center z-0"
+          alt=""
+          aria-hidden="true"
+          src="https://c.animaapp.com/nj999vRB/img/rectangle-39436.svg"
+        />
+        <div className="relative z-10 max-w-[1728px] mx-auto px-6 md:px-16 lg:px-24 py-14 md:py-20">
+          <div className="flex flex-col items-center gap-3 mb-10">
+            <h2 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-3xl md:text-[44px] text-center tracking-[0.88px] leading-[54px]">
+              Meet our Team
+            </h2>
+            <p className="[font-family:'Poppins',Helvetica] font-normal text-white text-base md:text-lg text-center leading-7">
+              Driven by expertise and united by purpose.
+            </p>
+          </div>
+          <LeadershipGallerySection />
+          <div className="flex justify-center mt-10">
+            <button
+              type="button"
+              className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#0e467a] rounded-lg border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
+                See More
+              </span>
+              <img className="w-5 h-5" alt="" aria-hidden="true" src="https://c.animaapp.com/nj999vRB/img/arrow-up-left-4.svg" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          TRUSTED BY / PARTNER LOGOS
+          ══════════════════════════════════════ */}
+      <section className="w-full bg-white py-14 md:py-20">
+        <div className="max-w-[1728px] mx-auto px-6 md:px-16 lg:px-24">
+          <div className="flex flex-col items-center gap-4 mb-10">
+            <h2 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-gray-900 text-3xl md:text-[44px] text-center tracking-[0.88px] leading-[54px]">
+              Educational Leaders Choose ICS Global
+            </h2>
+            <p className="max-w-[602px] [font-family:'Poppins',Helvetica] font-normal text-primary-3 text-base md:text-lg text-center leading-7">
+              Our work speaks through the trust of reputed academic and professional institutions worldwide
+            </p>
+          </div>
+          <img
+            className="w-full h-auto mx-auto"
+            alt="Partner logos"
+            src="https://c.animaapp.com/nj999vRB/img/frame-1321318068.svg"
+          />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          CONFERENCE CTA
+          ══════════════════════════════════════ */}
+      <section className="relative w-full overflow-hidden">
+        <img
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          alt=""
+          aria-hidden="true"
+          src="https://c.animaapp.com/nj999vRB/img/clip-path-group.png"
+        />
+        <div className="relative z-10 flex flex-col items-center justify-center px-4 py-16 md:py-20 min-h-[300px] md:min-h-[355px]">
+          <ConferenceCtaSection />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          CORE PHILOSOPHY
+          ══════════════════════════════════════ */}
+      <section className="relative w-full overflow-hidden">
+        <img
+          className="absolute inset-0 w-full h-full object-cover object-center z-0"
+          alt=""
+          aria-hidden="true"
+          src="https://c.animaapp.com/nj999vRB/img/rectangle-9508.svg"
+        />
+        <div className="relative z-10 max-w-[1728px] mx-auto px-6 md:px-16 lg:px-24 py-14 md:py-20">
+          <div className="flex flex-col items-center gap-3 mb-10">
+            <h2 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-3xl md:text-[44px] text-center tracking-[0.88px] leading-[54px]">
+              Core Philosophy
+            </h2>
+            <p className="[font-family:'Poppins',Helvetica] font-normal text-white text-base md:text-lg text-center leading-7">
+              Driven by Purpose. Powered by Intelligence.
+            </p>
+          </div>
+          <ConferenceHighlightSection />
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          BLOGS & GUIDES
+          ══════════════════════════════════════ */}
+      <CampusExperienceSection />
+
+      {/* ══════════════════════════════════════
+          CONTACT / FOOTER
+          ══════════════════════════════════════ */}
+      <ContactSupportSection />
+    </div>
+  );
+};
