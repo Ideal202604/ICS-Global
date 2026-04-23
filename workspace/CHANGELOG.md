@@ -18,6 +18,12 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-23 — Enforce strict horizontal social icons row
+- Social icons nav: inline `style` for `flex-direction:row; flex-wrap:nowrap; gap:8px` to guarantee single-row alignment
+- Icon buttons: `minWidth/minHeight:26px`, `flexShrink:0` via inline style for no-wrap guarantee
+- Icons 12×12 via inline style; hover bg preserved; left-aligned under name/role
+- File: `src/screens/IcsHome/sections/LeadershipGallerySection/LeadershipGallerySection.tsx`
+
 ## 2026-04-22 — Fix team member card UI (image overlap + inline social icons)
 - Profile image container set to fixed 252px height; gradient background starts at top:45px for raised overlap effect
 - Social icons nav changed to `flex flex-row items-center gap-2` (8px) with `flex-shrink-0` for strict single-row alignment

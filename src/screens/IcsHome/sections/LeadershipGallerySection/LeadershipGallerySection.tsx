@@ -114,18 +114,19 @@ const MemberCard = ({ name, role, imgSrc, bgImg }: MemberCardProps) => (
       )}
     </div>
     {/* Info card */}
-    <div className="flex flex-col items-start gap-4 p-4 w-full bg-white rounded-[0px_0px_4px_4px] flex-1">
-      <div className="flex flex-col items-start justify-center gap-[3px] w-full">
-        <h3 className="[font-family:'Inter',Helvetica] font-semibold text-black text-lg sm:text-xl md:text-2xl tracking-[0] leading-[30px]">
+    <div className="flex flex-col items-start gap-3 px-3 py-3 w-full bg-white rounded-[0px_0px_4px_4px] flex-1">
+      <div className="flex flex-col items-start justify-center gap-[2px] w-full">
+        <h3 className="[font-family:'Inter',Helvetica] font-semibold text-black text-sm sm:text-base tracking-[0] leading-5">
           {name}
         </h3>
-        <p className="[font-family:'Inter',Helvetica] font-normal text-gray-600 text-sm md:text-base tracking-[0] leading-6">
+        <p className="[font-family:'Inter',Helvetica] font-normal text-gray-600 text-[11px] sm:text-xs tracking-[0] leading-4">
           {role}
         </p>
       </div>
       {/* Social icons — single horizontal row, left-aligned */}
       <nav
-        className="flex flex-row items-center gap-2"
+        className="flex items-center flex-nowrap gap-2"
+        style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 8, flexWrap: "nowrap" }}
         aria-label={`${name} social links`}
       >
         {socialIcons.map((icon, i) => (
@@ -133,9 +134,10 @@ const MemberCard = ({ name, role, imgSrc, bgImg }: MemberCardProps) => (
             key={i}
             href="#"
             aria-label={`${name} on ${icon.alt}`}
-            className="inline-flex items-center justify-center w-[18px] h-[18px] flex-shrink-0 hover:opacity-70 transition-opacity"
+            className="inline-flex items-center justify-center rounded-full bg-[#1a2b3c] hover:bg-[#2a3d4f] transition-colors"
+            style={{ width: 26, height: 26, minWidth: 26, minHeight: 26, flexShrink: 0 }}
           >
-            <img className="w-[18px] h-[18px] block" alt={icon.alt} src={icon.src} loading="lazy" />
+            <img className="block object-contain brightness-0 invert" style={{ width: 12, height: 12 }} alt={icon.alt} src={icon.src} loading="lazy" />
           </a>
         ))}
       </nav>
