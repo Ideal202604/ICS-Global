@@ -12,7 +12,7 @@ const navItems = [
   { label: "Services", path: "/services" },
   { label: "Blog", path: "/blog" },
   { label: "Gallery", path: "/gallery" },
-  { label: "Conference", path: "/" },
+  { label: "Conference", path: "/conference", disabled: true },
 ] as const;
 
 const galleryImages = [
@@ -71,24 +71,30 @@ export const About = (): JSX.Element => {
             aria-label="Primary navigation"
             className="hidden lg:inline-flex items-center gap-8 xl:gap-10 bg-white rounded-[10px] border border-solid border-gray-200 shadow-shadow-sm px-4 py-3.5"
           >
-            {navItems.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() => navigate(item.path)}
-                className="all-[unset] box-border cursor-pointer"
-              >
-                <span
-                  className={`[font-family:'Poppins',Helvetica] text-base leading-6 tracking-[0] whitespace-nowrap ${
-                    item.label === "About"
-                      ? "font-semibold text-[#f87e0f]"
-                      : "font-medium text-primary-3"
-                  }`}
+            {navItems.map((item) => {
+              const isDisabled = "disabled" in item && item.disabled;
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => !isDisabled && navigate(item.path)}
+                  aria-disabled={isDisabled || undefined}
+                  className={`all-[unset] box-border ${isDisabled ? "cursor-not-allowed opacity-40" : "cursor-pointer"}`}
                 >
-                  {item.label}
-                </span>
-              </button>
-            ))}
+                  <span
+                    className={`[font-family:'Poppins',Helvetica] text-base leading-6 tracking-[0] whitespace-nowrap ${
+                      isDisabled
+                        ? "font-medium text-gray-400"
+                        : item.label === "About"
+                          ? "font-semibold text-[#f87e0f]"
+                          : "font-medium text-primary-3"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+                </button>
+              );
+            })}
           </nav>
 
           {/* Contact CTA — hidden on mobile */}
@@ -150,15 +156,17 @@ export const About = (): JSX.Element => {
             <div className="mx-4 mt-4 bg-white rounded-2xl flex flex-col overflow-hidden shadow-xl">
               {navItems.map((item) => {
                 const isActive = item.label === "About";
+                const isDisabled = "disabled" in item && item.disabled;
                 return (
                   <button
                     key={item.label}
                     type="button"
-                    onClick={() => { navigate(item.path); setMenuOpen(false); }}
-                    className="w-full text-left cursor-pointer"
+                    onClick={() => { if (!isDisabled) { navigate(item.path); setMenuOpen(false); } }}
+                    aria-disabled={isDisabled || undefined}
+                    className={`w-full text-left ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
                   >
-                    <div className={`mx-2 my-1 px-6 py-4 rounded-xl ${isActive ? "bg-[#1a4f72]" : ""}`}>
-                      <span className={`[font-family:'Poppins',Helvetica] text-xl font-bold leading-tight ${isActive ? "text-white" : "text-[#555f6d]"}`}>
+                    <div className={`mx-2 my-1 px-6 py-4 rounded-xl ${isDisabled ? "opacity-40" : isActive ? "bg-[#1a4f72]" : ""}`}>
+                      <span className={`[font-family:'Poppins',Helvetica] text-xl font-bold leading-tight ${isDisabled ? "text-gray-400" : isActive ? "text-white" : "text-[#555f6d]"}`}>
                         {item.label}
                       </span>
                     </div>

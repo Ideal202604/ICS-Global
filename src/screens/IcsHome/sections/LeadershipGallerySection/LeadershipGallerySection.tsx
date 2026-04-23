@@ -41,7 +41,7 @@ const allMembers = [
   },
   {
     name: "Amol Ghadge",
-    role: "Team Lead, Course Development and Marketing",
+    role: "Team Lead, Course Devp & Marketing",
     imgSrc: "https://c.animaapp.com/nj999vRB/img/chatgpt-image-apr-8--2026--02-32-45-pm-2-6@2x.png",
   },
   {
@@ -106,7 +106,7 @@ const MemberCard = ({ name, role, imgSrc, bgImg }: MemberCardProps) => (
       )}
       {bgImg && (
         <div
-          className="absolute inset-0 z-[1] bg-contain bg-center bg-no-repeat rounded-[16px_16px_0px_0px]"
+          className="absolute inset-0 z-[1] bg-cover bg-top bg-no-repeat rounded-[16px_16px_0px_0px]"
           role="img"
           aria-label={name}
           style={{ backgroundImage: `url(${bgImg})` }}
@@ -114,30 +114,75 @@ const MemberCard = ({ name, role, imgSrc, bgImg }: MemberCardProps) => (
       )}
     </div>
     {/* Info card */}
-    <div className="flex flex-col items-start gap-3 px-3 py-3 w-full bg-white rounded-[0px_0px_4px_4px] flex-1">
-      <div className="flex flex-col items-start justify-center gap-[2px] w-full">
-        <h3 className="[font-family:'Inter',Helvetica] font-semibold text-black text-sm sm:text-base tracking-[0] leading-5">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        gap: 10,
+        padding: "10px 10px",
+        width: "100%",
+        backgroundColor: "#fff",
+        borderRadius: "0 0 4px 4px",
+        flex: "1 1 auto",
+        boxSizing: "border-box",
+        overflow: "hidden",
+      }}
+    >
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 2, width: "100%" }}>
+        <h3 className="[font-family:'Inter',Helvetica] font-semibold text-black text-sm sm:text-base tracking-[0] leading-5" style={{ margin: 0 }}>
           {name}
         </h3>
-        <p className="[font-family:'Inter',Helvetica] font-normal text-gray-600 text-[11px] sm:text-xs tracking-[0] leading-4">
+        <p className="[font-family:'Inter',Helvetica] font-normal text-gray-600 text-[11px] sm:text-xs tracking-[0] leading-4" style={{ margin: 0 }}>
           {role}
         </p>
       </div>
       {/* Social icons — single horizontal row, left-aligned */}
       <nav
-        className="flex items-center flex-nowrap gap-2"
-        style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 8, flexWrap: "nowrap" }}
         aria-label={`${name} social links`}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          gap: 8,
+          flexWrap: "nowrap",
+          justifyContent: "flex-start",
+          width: "auto",
+          maxWidth: "100%",
+          overflow: "visible",
+        }}
       >
         {socialIcons.map((icon, i) => (
           <a
             key={i}
             href="#"
             aria-label={`${name} on ${icon.alt}`}
-            className="inline-flex items-center justify-center rounded-full bg-[#1a2b3c] hover:bg-[#2a3d4f] transition-colors"
-            style={{ width: 26, height: 26, minWidth: 26, minHeight: 26, flexShrink: 0 }}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 26,
+              height: 26,
+              minWidth: 26,
+              minHeight: 26,
+              maxWidth: 26,
+              maxHeight: 26,
+              flexShrink: 0,
+              flexGrow: 0,
+              borderRadius: "50%",
+              backgroundColor: "#1a2b3c",
+              transition: "background-color 0.15s",
+              boxSizing: "border-box",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#2a3d4f")}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#1a2b3c")}
           >
-            <img className="block object-contain brightness-0 invert" style={{ width: 12, height: 12 }} alt={icon.alt} src={icon.src} loading="lazy" />
+            <img
+              style={{ display: "block", width: 12, height: 12, objectFit: "contain", filter: "brightness(0) invert(1)", flexShrink: 0 }}
+              alt={icon.alt}
+              src={icon.src}
+              loading="lazy"
+            />
           </a>
         ))}
       </nav>

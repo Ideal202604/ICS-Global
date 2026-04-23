@@ -18,6 +18,59 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-23 — Full inline-style lockdown on social icons + card info
+- Converted entire info card container from Tailwind classes to 100% inline styles to eliminate all specificity conflicts
+- Social icons nav uses `<nav>` with strict `flexDirection:row`, `flexWrap:nowrap`, `gap:8px`
+- Each icon link locked to exact `26×26` with `maxWidth/maxHeight` + `flexShrink:0/flexGrow:0`
+- Works identically on mobile (2-col grid) and desktop (5-col grid)
+- File: `LeadershipGallerySection.tsx`
+
+## 2026-04-23 — Make mobile About section visible again
+- Replaced `bg-transparent` with dark blue gradient (`#0e2a47 → #1a4f72`) on the `lg:hidden` About section
+- White text/button now visible on mobile/tablet viewports
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-23 — Match bgImg team member photo sizes to imgSrc members
+- Changed `bg-contain bg-center` → `bg-cover bg-top` on `bgImg` div in `MemberCard`
+- Dr. Arpita Kathane & Sumit Dorle photos now fill the same area as other team members
+- File: `LeadershipGallerySection.tsx`
+
+## 2026-04-23 — Transparent background for mobile About section
+- Changed `bg-[#0e2a47]` → `bg-transparent` on the `lg:hidden` About section in `IcsHome.tsx`
+- Affects phone and tablet viewports only; desktop layout unchanged
+
+## 2026-04-23 — Fix Conference nav button clickability
+- Added explicit `disabled: false` to all `navItems` entries in `Navbar.tsx`
+- Replaced ambiguous `"disabled" in item` runtime check with direct `item.disabled` property access
+- Conference link now renders at full opacity with correct text color and navigates to `/conference`
+- Fix applies to both desktop pill nav and mobile overlay menu
+
+## 2026-04-23 — Marquee scroll animation for blog cards
+- Replaced static 3-column grid with continuous CSS marquee animation (right-to-left)
+- Cards duplicated 4× for seamless infinite loop; 30s linear cycle, pauses on hover
+- `@keyframes marquee-scroll` with `translateX(-50%)` for seamless wrap
+- Extracted `BlogCard` sub-component; fixed card width via `clamp(340px, 28vw, 440px)`
+- Shared by Home + About pages (About imports `HomeBlogsSlider`)
+- File: `src/screens/IcsHome/sections/HomeBlogsSlider.tsx`
+
+## 2026-04-23 — Center 3 blog cards in static grid layout
+- Replaced carousel/clone infinite slider with a simple centered 3-column grid
+- Removed all swipe/drag/auto-slide/arrow logic — all 3 cards always visible
+- `grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8` inside `max-w-[1400px] mx-auto`
+- Reduced card array from 4 to 3 items; responsive: stacks on mobile
+- File: `src/screens/IcsHome/sections/HomeBlogsSlider.tsx`
+
+## 2026-04-23 — Disable Conference nav link site-wide
+- Added `disabled: true` flag to Conference nav item in all 8 page files
+- Disabled state: `opacity-40`, `cursor-not-allowed`, `text-gray-400`, `aria-disabled`, click prevented
+- Applies to both desktop nav pill and mobile overlay menu on every page
+- Files: `Navbar.tsx`, `IcsHome.tsx`, `About.tsx`, `Blog.tsx`, `Conference.tsx`, `Contact.tsx`, `Gallery.tsx`, `Service.tsx`
+
+## 2026-04-23 — Comprehensive README rewrite
+- Full humanized README covering all 7 pages, features, tech stack, project structure, setup, EmailJS config
+- Responsive design docs, contributing guidelines, and license section
+- File: `README.md`
+
 ## 2026-04-23 — Enforce strict horizontal social icons row
 - Social icons nav: inline `style` for `flex-direction:row; flex-wrap:nowrap; gap:8px` to guarantee single-row alignment
 - Icon buttons: `minWidth/minHeight:26px`, `flexShrink:0` via inline style for no-wrap guarantee

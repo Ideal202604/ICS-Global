@@ -2,12 +2,12 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const navItems = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Services", path: "/services" },
-  { label: "Blog", path: "/blog" },
-  { label: "Gallery", path: "/gallery" },
-  { label: "Conference", path: "/conference" },
+  { label: "Home", path: "/", disabled: false },
+  { label: "About", path: "/about", disabled: false },
+  { label: "Services", path: "/services", disabled: false },
+  { label: "Blog", path: "/blog", disabled: false },
+  { label: "Gallery", path: "/gallery", disabled: false },
+  { label: "Conference", path: "/conference", disabled: false },
 ] as const;
 
 interface NavbarProps {
@@ -62,25 +62,31 @@ export const Navbar = ({
         className="hidden lg:inline-flex h-[52px] items-center justify-center gap-2 px-4 py-3.5 bg-white rounded-[10px] border border-solid border-gray-200 shadow-shadow-sm"
       >
         <div className="inline-flex items-center gap-8">
-          {navItems.map((item) => (
-            <button
-              key={item.label}
-              type="button"
-              onClick={() => navigate(item.path)}
-              aria-current={isActive(item.path) ? "page" : undefined}
-              className="all-[unset] box-border cursor-pointer"
-            >
-              <span
-                className={`[font-family:'Poppins',Helvetica] text-base leading-6 tracking-[0] whitespace-nowrap ${
-                  isActive(item.path)
-                    ? "font-semibold text-primary-1"
-                    : "font-medium text-primary-3"
-                }`}
+          {navItems.map((item) => {
+            const isDisabled = "disabled" in item && item.disabled;
+            return (
+              <button
+                key={item.label}
+                type="button"
+                onClick={() => !item.disabled && navigate(item.path)}
+                aria-current={isActive(item.path) ? "page" : undefined}
+                aria-disabled={item.disabled || undefined}
+                className={`all-[unset] box-border ${item.disabled ? "cursor-not-allowed opacity-40" : "cursor-pointer"}`}
               >
-                {item.label}
-              </span>
-            </button>
-          ))}
+                <span
+                  className={`[font-family:'Poppins',Helvetica] text-base leading-6 tracking-[0] whitespace-nowrap ${
+                    item.disabled
+                      ? "font-medium text-gray-400"
+                      : isActive(item.path)
+                        ? "font-semibold text-primary-1"
+                        : "font-medium text-primary-3"
+                  }`}
+                >
+                  {item.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </nav>
 
@@ -146,29 +152,32 @@ export const Navbar = ({
           {/* White card with nav links */}
           <div className="mx-4 mt-4 bg-white rounded-2xl flex flex-col overflow-hidden shadow-xl">
             {navItems.map((item) => (
-              <button
-                key={item.label}
-                type="button"
-                onClick={() => { navigate(item.path); setMenuOpen(false); }}
-                aria-current={isActive(item.path) ? "page" : undefined}
-                className="all-[unset] box-border cursor-pointer w-full"
-              >
-                <div
-                  className={`px-7 py-5 text-left ${
-                    isActive(item.path)
-                      ? "bg-[#1a4f72] rounded-xl mx-2 my-2"
-                      : "mx-2 my-1"
-                  }`}
+                <button
+                  key={item.label}
+                  type="button"
+                  onClick={() => { if (!item.disabled) { navigate(item.path); setMenuOpen(false); } }}
+                  aria-current={isActive(item.path) ? "page" : undefined}
+                  aria-disabled={item.disabled || undefined}
+                  className={`all-[unset] box-border w-full ${item.disabled ? "cursor-not-allowed" : "cursor-pointer"}`}
                 >
-                  <span
-                    className={`[font-family:'Poppins',Helvetica] text-xl font-bold leading-tight tracking-[0] ${
-                      isActive(item.path) ? "text-white" : "text-[#555f6d]"
+                  <div
+                    className={`px-7 py-5 text-left ${
+                      item.disabled
+                        ? "mx-2 my-1 opacity-40"
+                        : isActive(item.path)
+                          ? "bg-[#1a4f72] rounded-xl mx-2 my-2"
+                          : "mx-2 my-1"
                     }`}
                   >
-                    {item.label}
-                  </span>
-                </div>
-              </button>
+                    <span
+                      className={`[font-family:'Poppins',Helvetica] text-xl font-bold leading-tight tracking-[0] ${
+                        item.disabled ? "text-gray-400" : isActive(item.path) ? "text-white" : "text-[#555f6d]"
+                      }`}
+                    >
+                      {item.label}
+                    </span>
+                  </div>
+                </button>
             ))}
 
             {/* Connect / CTA button inside card */}
