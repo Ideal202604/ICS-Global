@@ -18,6 +18,16 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-23 — Enable Conference nav button on all pages
+- Removed `disabled: true` from Conference nav item in all 7 page files + Navbar.tsx
+- Removed all `isDisabled` guard logic from desktop pill nav and mobile overlay menus
+- Conference now navigates to `/conference` on click, renders at full opacity with correct text color
+- Files: `IcsHome.tsx`, `About.tsx`, `Blog.tsx`, `Conference.tsx`, `Gallery.tsx`, `Service.tsx`, `Contact.tsx`, `Navbar.tsx`
+
+## 2026-04-23 — Update Blogs & Guides section background color
+- Changed `backgroundColor` from `#0e2a47` (dark navy) to `#1566a0` (blue) per user request
+- File: `src/screens/IcsHome/sections/HomeBlogsSlider.tsx`
+
 ## 2026-04-23 — Full inline-style lockdown on social icons + card info
 - Converted entire info card container from Tailwind classes to 100% inline styles to eliminate all specificity conflicts
 - Social icons nav uses `<nav>` with strict `flexDirection:row`, `flexWrap:nowrap`, `gap:8px`

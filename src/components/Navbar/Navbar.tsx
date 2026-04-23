@@ -7,7 +7,7 @@ const navItems = [
   { label: "Services", path: "/services", disabled: false },
   { label: "Blog", path: "/blog", disabled: false },
   { label: "Gallery", path: "/gallery", disabled: false },
-  { label: "Conference", path: "/conference", disabled: false },
+  { label: "Conference", path: "/conference" },
 ] as const;
 
 interface NavbarProps {
@@ -63,7 +63,7 @@ export const Navbar = ({
       >
         <div className="inline-flex items-center gap-8">
           {navItems.map((item) => {
-            const isDisabled = "disabled" in item && item.disabled;
+            const isDisabled = (item as any).disabled === true;
             return (
               <button
                 key={item.label}

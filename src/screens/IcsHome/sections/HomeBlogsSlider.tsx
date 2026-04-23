@@ -83,15 +83,9 @@ export const HomeBlogsSlider = (): JSX.Element => {
       style={{
         paddingTop: "clamp(56px, 5.8vw, 112px)",
         paddingBottom: "clamp(48px, 4.2vw, 80px)",
+        backgroundColor: "#1566a0",
       }}
     >
-      {/* Background SVG */}
-      <img
-        className="absolute inset-0 w-full h-full object-fill pointer-events-none"
-        aria-hidden="true"
-        alt=""
-        src="https://c.animaapp.com/mo857b66QKlwSd/img/rectangle-39437.svg"
-      />
 
       <div className="relative z-10">
         {/* Header */}
