@@ -279,7 +279,7 @@ export const IcsHome = (): JSX.Element => {
             <img
               className="h-12 w-auto"
               alt="ICS Global logo"
-              src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776850331288-0.png"
+              src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776945808032-0.png"
             />
           </button>
 
@@ -353,7 +353,7 @@ export const IcsHome = (): JSX.Element => {
                 <img
                   className="h-12 w-auto object-contain"
                   alt="ICS Global logo"
-                  src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776850331288-0.png"
+                  src="https://c.animaapp.com/nj999vRB/img/uploaded-asset-1776945808032-0.png"
                 />
               </button>
               <button
@@ -439,6 +439,7 @@ export const IcsHome = (): JSX.Element => {
           <div className="mt-8">
             <button
               type="button"
+              onClick={() => navigate("/about")}
               className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#0e467a] rounded-lg overflow-hidden border border-solid border-white cursor-pointer hover:bg-[#0a3560] transition-colors"
             >
               <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base md:text-lg text-center leading-6 whitespace-nowrap">

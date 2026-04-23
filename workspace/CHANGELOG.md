@@ -18,6 +18,10 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-23 — Wire "Explore Our Impact" button to About page
+- Added `onClick={() => navigate("/about")}` to the hero CTA button in `IcsHome.tsx`
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
 ## 2026-04-23 — Enable Conference nav button on all pages
 - Removed `disabled: true` from Conference nav item in all 7 page files + Navbar.tsx
 - Removed all `isDisabled` guard logic from desktop pill nav and mobile overlay menus
