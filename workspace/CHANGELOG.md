@@ -18,6 +18,13 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-24 — Global ScrollToTop button wired across all pages
+- Rebuilt `ScrollToTopButton.tsx` with useState/useEffect scroll listener, smooth scroll on click
+- Mounted globally inside `<BrowserRouter>` in `src/index.tsx` — renders on every route
+- CSS: `position:fixed; bottom:24px; right:24px; z-index:9999`; fade+slide transition on show/hide
+- Mobile: reduces to 40px at ≤640px; hover scales button up; aria-label for accessibility
+- Files: `src/components/ScrollToTopButton.tsx`, `src/index.tsx`
+
 ## 2026-04-24 — LocationMapSection: make Address card a clickable Google Maps link
 - Added `href` to Address card: `https://www.google.com/maps/place/Idealizeer+...`
 - Wrapped address text in `<a target="_blank">` inside `<address>` tag

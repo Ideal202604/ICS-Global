@@ -42,12 +42,6 @@ export const Gallery = (): JSX.Element => {
           className="absolute inset-0 w-full h-full object-cover object-center"
           alt=""
           aria-hidden="true"
-          src="https://c.animaapp.com/mo8awahp9YbdPR/img/rectangle-9509.png"
-        />
-        <img
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          alt=""
-          aria-hidden="true"
           src="https://c.animaapp.com/mo8awahp9YbdPR/img/rectangle-9522.png"
         />
 
