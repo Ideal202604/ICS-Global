@@ -18,6 +18,63 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-24 — Reuse About page BlogsAndGuidesSection on Home page
+- Removed inline `HomeBlogsCarousel` (duplicate) from `IcsHome.tsx`
+- Imported and rendered `BlogsAndGuidesSection` from `src/screens/About/sections/BlogsAndGuidesSection.tsx`
+- Identical design, content, behaviour, and carousel logic — no code duplication
+- Files: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-24 — Wire all footer links, contact info & social icons
+- Quick Links: Home/Courses/Awards → navigate('/'), About Us → '/about', Gallery → '/gallery', Team → navigate('/') + scrollIntoView('#team')
+- Popular Categories: all → navigate('/') with scroll-to-top
+- Contact: phone → tel:, email → mailto:, address → Google Maps link (target=_blank)
+- Social icons: Facebook/Instagram/LinkedIn updated to correct Idealizeer URLs (target=_blank)
+- Added `id="team"` to Meet Our Team section in `IcsHome.tsx` for anchor scroll
+- Files: `ContactAndFooter.tsx`, `IcsHome.tsx`
+
+## 2026-04-24 — Reorder homepage sections to match reference layout
+- New order after "Meet our Team": Logos → Core Philosophy → ICMLBDA Banner → Blogs & Guides
+- Moved ConferenceCtaSection below ConferenceHighlightSection (Core Philosophy)
+- No UI/styling changes — section reorder only
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-24 — Slightly decrease marquee strip padding (28px → 14px)
+- Reduced `padding: 0 28px` → `padding: 0 14px` on `.marquee-strip` for tighter icon gap
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-24 — Fix partner logos seam gap between two marquee copies
+- Added `padding: 0 28px; box-sizing: content-box` to `.marquee-strip`
+- Both strips are now identically wider → `-50%` still equals exactly one strip width → still seamless
+- Seam between copy1 and copy2 now has 56px gap (28px right + 28px left) matching internal icon spacing
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-24 — Fix partner logos marquee spacing & seamless loop
+## 2026-04-24 — Fix partner logos seam gap between two marquee copies
+- Added `padding: 0 28px; box-sizing: content-box` to `.marquee-strip`
+- Both strips are now identically wider → `-50%` still equals exactly one strip width → still seamless
+- Seam between copy1 and copy2 now has 56px gap (28px right + 28px left) matching internal icon spacing
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-24 — Fix partner logos marquee spacing & seamless loop
+- Replaced `width:200%` percentage layout with `width:max-content` track + `width:100vw` per strip
+- Each strip is a flex `div` wrapper so images have proper `display:block` and no inline gaps
+- Keyframes corrected: `translateX(0) → translateX(-50%)` for smooth left-scroll
+- Added `mask-image` fade-edges for polished entry/exit; `will-change:transform` for GPU compositing
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-24 — Infinite marquee for partner logos section (initial)
+- Replaced static SVG image with a CSS `@keyframes marquee-ltr` infinite scroll (left-to-right loop)
+- Two copies of the SVG placed side-by-side at `width:50%` each inside a `width:200%` track
+- 28s linear loop; pauses on hover; uses `transform:translateX` for GPU-composited animation
+- No arrows or controls; responsive across all screen sizes
+- File: `src/screens/IcsHome/IcsHome.tsx`
+
+## 2026-04-23 — Center navbar nav pill on all pages
+## 2026-04-23 — Center navbar nav pill on all pages
+- Changed header from `justify-between` flex to absolute-centered nav pill (`left-1/2 -translate-x-1/2`)
+- Logo stays left, CTA button pushed right via `ml-auto`, nav pill is always perfectly centered
+- File: `src/components/Navbar/Navbar.tsx`
+
 ## 2026-04-23 — Wire "Explore Our Impact" button to About page
 - Added `onClick={() => navigate("/about")}` to the hero CTA button in `IcsHome.tsx`
 - File: `src/screens/IcsHome/IcsHome.tsx`

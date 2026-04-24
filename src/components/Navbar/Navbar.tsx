@@ -41,7 +41,7 @@ export const Navbar = ({
   };
 
   return (
-    <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 md:px-16 lg:px-24 pt-5">
+    <header className="absolute inset-x-0 top-0 z-20 flex items-center px-6 md:px-16 lg:px-24 pt-5">
       {/* Logo */}
       <button
         type="button"
@@ -56,10 +56,10 @@ export const Navbar = ({
         />
       </button>
 
-      {/* Desktop Nav pill — matches Figma exactly: h-[52px], px-4, py-3.5, gap-8, rounded-[10px] */}
+      {/* Desktop Nav pill — centered absolutely so it always sits in the middle */}
       <nav
         aria-label="Primary navigation"
-        className="hidden lg:inline-flex h-[52px] items-center justify-center gap-2 px-4 py-3.5 bg-white rounded-[10px] border border-solid border-gray-200 shadow-shadow-sm"
+        className="hidden lg:inline-flex h-[52px] items-center justify-center gap-2 px-4 py-3.5 bg-white rounded-[10px] border border-solid border-gray-200 shadow-shadow-sm absolute left-1/2 -translate-x-1/2"
       >
         <div className="inline-flex items-center gap-8">
           {navItems.map((item) => {
@@ -90,11 +90,11 @@ export const Navbar = ({
         </div>
       </nav>
 
-      {/* Desktop CTA */}
+      {/* Desktop CTA — pushed to the far right with ml-auto */}
       <button
         type="button"
         onClick={onCtaClick}
-        className="all-[unset] box-border hidden md:inline-flex items-center justify-center gap-2 h-[52px] px-5 py-3 bg-primary-1 rounded-lg border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
+        className="all-[unset] box-border hidden md:inline-flex items-center justify-center gap-2 h-[52px] px-5 py-3 bg-primary-1 rounded-lg border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity ml-auto"
       >
         <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
           {ctaLabel}

@@ -8,12 +8,12 @@ import {
 } from "../../lib/emailjs";
 
 const quickLinks = [
-  { label: "Home", path: "/" },
-  { label: "About Us", path: "/about" },
-  { label: "Courses", path: "/" },
-  { label: "Team", path: "/" },
-  { label: "Gallery", path: "/gallery" },
-  { label: "Awards", path: "/" },
+  { label: "Home", path: "/", anchor: null },
+  { label: "About Us", path: "/about", anchor: null },
+  { label: "Courses", path: "/", anchor: null },
+  { label: "Team", path: "/", anchor: "team" },
+  { label: "Gallery", path: "/gallery", anchor: null },
+  { label: "Awards", path: "/", anchor: null },
 ];
 
 const popularCategories = [
@@ -24,9 +24,9 @@ const popularCategories = [
 ];
 
 const socialIcons = [
-  { href: "https://facebook.com", label: "Facebook", src: "https://c.animaapp.com/mo9sqx7fwKw0SH/img/social-icons.png" },
-  { href: "https://instagram.com", label: "Instagram", src: "https://c.animaapp.com/mo9sqx7fwKw0SH/img/social-icons-1.png" },
-  { href: "https://linkedin.com", label: "LinkedIn", src: "https://c.animaapp.com/mo9sqx7fwKw0SH/img/social-icons-2.png" },
+  { href: "https://www.facebook.com/idealizeer/", label: "Facebook", src: "https://c.animaapp.com/mo9sqx7fwKw0SH/img/social-icons.png" },
+  { href: "https://www.instagram.com/idealizeer/", label: "Instagram", src: "https://c.animaapp.com/mo9sqx7fwKw0SH/img/social-icons-1.png" },
+  { href: "https://www.linkedin.com/company/idealizeer-content-solutions/posts/?feedView=all", label: "LinkedIn", src: "https://c.animaapp.com/mo9sqx7fwKw0SH/img/social-icons-2.png" },
 ];
 
 /* ── Validation helpers ── */
@@ -378,7 +378,21 @@ export const ContactAndFooter = (): JSX.Element => {
                   <button
                     key={link.label}
                     type="button"
-                    onClick={() => navigate(link.path)}
+                    onClick={() => {
+                      if (link.anchor) {
+                        // Navigate to home first, then scroll to anchor
+                        navigate(link.path);
+                        setTimeout(() => {
+                          const el = document.getElementById(link.anchor!);
+                          if (el) {
+                            el.scrollIntoView({ behavior: "smooth", block: "start" });
+                          }
+                        }, 100);
+                      } else {
+                        navigate(link.path);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                    }}
                     className="all-[unset] box-border [font-family:'Poppins',Helvetica] font-medium text-white text-sm md:text-base leading-6 tracking-[0] cursor-pointer hover:opacity-80 transition-opacity text-left"
                   >
                     {link.label}
@@ -392,12 +406,14 @@ export const ContactAndFooter = (): JSX.Element => {
                   Popular Categories
                 </h3>
                 {popularCategories.map((cat) => (
-                  <p
+                  <button
                     key={cat}
-                    className="[font-family:'Poppins',Helvetica] font-medium text-white text-sm md:text-base leading-6 tracking-[0]"
+                    type="button"
+                    onClick={() => { navigate("/"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    className="all-[unset] box-border [font-family:'Poppins',Helvetica] font-medium text-white text-sm md:text-base leading-6 tracking-[0] cursor-pointer hover:opacity-80 transition-opacity text-left"
                   >
                     {cat}
-                  </p>
+                  </button>
                 ))}
               </div>
 
@@ -418,11 +434,16 @@ export const ContactAndFooter = (): JSX.Element => {
                 >
                   Email: info@idealizeer.com
                 </a>
-                <p className="[font-family:'Poppins',Helvetica] font-medium text-white text-sm md:text-base leading-6 tracking-[0]">
+                <a
+                  href="https://www.google.com/maps/place/Idealizeer+Content+Solutions+Private+Limited/@18.5863645,73.7360261,17z/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="[font-family:'Poppins',Helvetica] font-medium text-white text-sm md:text-base leading-6 tracking-[0] hover:opacity-80 transition-opacity"
+                >
                   Address: S. No. 138/1, City Centre,<br />
                   Office No. 211, Hinjawadi, Phase 1,<br />
                   Pune, Maharashtra 411057
-                </p>
+                </a>
               </address>
 
             </div>
