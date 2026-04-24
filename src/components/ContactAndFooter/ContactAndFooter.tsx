@@ -161,8 +161,8 @@ export const ContactAndFooter = (): JSX.Element => {
           CONTACT SECTION — "Let's Connect"
           Outer light-gray wrapper → blue rounded card → form + image
           ═══════════════════════════════════════════ */}
-      <div className="w-full bg-[#eef1f5] py-12 md:py-16 lg:py-20">
-        <div className="max-w-[1728px] mx-auto px-6 md:px-16 lg:px-28 xl:px-36">
+      <div className="w-full bg-[#eef1f5] py-12 md:py-16 lg:py-20 xl:py-24">
+        <div className="max-w-[1728px] mx-auto px-6 md:px-16 lg:px-24 xl:px-32">
           <div className="rounded-2xl overflow-hidden shadow-2xl">
 
               {/* ── Blue outer card ── */}

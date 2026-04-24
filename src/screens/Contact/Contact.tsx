@@ -21,7 +21,7 @@ export const Contact = (): JSX.Element => {
     <div className="bg-white overflow-x-hidden w-full">
 
       {/* ── HERO ── */}
-      <section className="relative w-full overflow-hidden">
+      <section className="relative w-full overflow-hidden" style={{ minHeight: "clamp(260px, 26vw, 500px)" }}>
         {/* Background */}
         <img
           className="absolute inset-0 w-full h-full object-cover object-center"

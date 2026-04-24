@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export const ConferenceCtaSection = (): JSX.Element => {
   const navigate = useNavigate();
   return (
-    <div className="w-full bg-[#f0f2f5] py-10 md:py-14 lg:py-16 px-4 md:px-8 lg:px-12 flex justify-center">
+    <div className="w-full bg-[#f0f2f5] py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-12 flex justify-center">
       {/* Rounded hero card */}
       <div className="w-full max-w-[1200px] rounded-xl overflow-hidden shadow-lg flex flex-col lg:flex-row min-h-[320px] lg:min-h-[380px]">
 

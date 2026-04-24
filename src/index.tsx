@@ -8,6 +8,8 @@ import { Box } from "./screens/Box";
 import { Gallery } from "./screens/Gallery";
 import { IcsHome } from "./screens/IcsHome";
 import { Service } from "./screens/Service";
+import { Conference } from "./screens/Conference";
+import { ScrollToTopButton } from "./components/ScrollToTopButton";
 
 createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
@@ -20,7 +22,9 @@ createRoot(document.getElementById("app") as HTMLElement).render(
         <Route path="/blog" element={<Blog />} />
         <Route path="/box" element={<Box />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/conference" element={<Conference />} />
       </Routes>
+      <ScrollToTopButton />
     </BrowserRouter>
   </StrictMode>,
 );

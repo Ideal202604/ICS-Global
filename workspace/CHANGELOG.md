@@ -18,6 +18,16 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-24 — Why ICS Global: heading 48px, list items text-xl
+- Heading: → `text-[36px] md:text-[48px]`; list items: → `text-lg md:text-xl`
+- File: `src/screens/Service/sections/BrandingMarketingSection.tsx`
+
+## 2026-04-24 — Remove rectangle-9509 background image from all hero sections
+- Removed `rectangle-9509.png` from `About.tsx` hero (was the sole background layer)
+- Removed `rectangle-9509.png` from `Blog.tsx` hero (was first of three stacked bg layers)
+- Removed `rectangle-9509.png` from `Conference.tsx` hero (was the sole background layer)
+- Image was NOT present in Service.tsx or Gallery.tsx (already confirmed)
+
 ## 2026-04-24 — Global ScrollToTop button wired across all pages
 - Rebuilt `ScrollToTopButton.tsx` with useState/useEffect scroll listener, smooth scroll on click
 - Mounted globally inside `<BrowserRouter>` in `src/index.tsx` — renders on every route

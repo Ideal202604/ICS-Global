@@ -101,7 +101,7 @@ export const BlogsAndGuidesSection = (): JSX.Element => {
       className="w-full relative overflow-hidden"
       style={{
         paddingTop: "clamp(56px, 5.8vw, 112px)",
-        paddingBottom: "clamp(48px, 4.2vw, 80px)",
+        paddingBottom: "clamp(56px, 5.8vw, 112px)",
         backgroundColor: "#1566a0",
       }}
     >

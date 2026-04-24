@@ -29,7 +29,7 @@ export const Service = (): JSX.Element => {
     <div className="bg-white overflow-x-hidden w-full">
 
       {/* ── HERO HEADER ── */}
-      <section className="relative w-full" style={{ height: "clamp(340px, 29.2vw, 561px)" }}>
+      <section className="relative w-full" style={{ minHeight: "clamp(300px, 29.2vw, 561px)", height: "clamp(300px, 29.2vw, 561px)" }}>
         {/* BG layers */}
         <img
           className="absolute inset-0 w-full h-full object-cover object-center"

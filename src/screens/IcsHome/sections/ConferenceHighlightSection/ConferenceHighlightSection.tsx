@@ -40,21 +40,21 @@ const highlights = [
 
 export const ConferenceHighlightSection = (): JSX.Element => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 w-full">
       {highlights.map((item, index) => (
         <div key={index} className="flex items-start gap-4">
           <img
-            className="w-[60px] md:w-[73px] h-auto flex-shrink-0"
+            className="w-[56px] md:w-[68px] lg:w-[73px] h-auto flex-shrink-0 mt-1"
             alt="Award icon"
             src="https://c.animaapp.com/nj999vRB/img/-pngtree-award-education-3d-illustrations-13003714-1-3.png"
           />
           <div className="flex items-start gap-3 flex-1">
-            <div className="w-0.5 self-stretch bg-white rounded-sm flex-shrink-0 min-h-[100px]" />
+            <div className="w-0.5 self-stretch bg-white/60 rounded-sm flex-shrink-0 min-h-[90px]" />
             <div className="flex flex-col gap-2 flex-1">
-              <h3 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-xl md:text-[28px] lg:text-[32px] leading-tight lg:leading-[44px]">
+              <h3 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-[clamp(20px,1.7vw,32px)] leading-[1.35]">
                 {item.title}
               </h3>
-              <p className="[font-family:'Poppins',Helvetica] text-white text-sm md:text-base leading-6">
+              <p className="[font-family:'Poppins',Helvetica] text-white/90 text-sm md:text-[15px] leading-6">
                 {item.description}
               </p>
             </div>

@@ -59,13 +59,7 @@ export const Blog = (): JSX.Element => {
     <div className="bg-white overflow-x-hidden w-full">
 
       {/* ── HERO ── */}
-      <section className="relative w-full" style={{ height: "clamp(340px, 29.2vw, 561px)" }}>
-        <img
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          alt=""
-          aria-hidden="true"
-          src="https://c.animaapp.com/mo8cljnvKkvzbU/img/rectangle-9509.png"
-        />
+      <section className="relative w-full" style={{ minHeight: "clamp(300px, 29.2vw, 561px)", height: "clamp(300px, 29.2vw, 561px)" }}>
         <img
           className="absolute inset-0 w-full h-full object-cover object-center"
           alt=""

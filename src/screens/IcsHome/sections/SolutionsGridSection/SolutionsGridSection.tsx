@@ -63,7 +63,7 @@ export const SolutionsGridSection = (): JSX.Element => {
       {cards.map((card, index) => (
         <div
           key={index}
-          className="flex flex-col bg-white rounded-2xl overflow-hidden border border-solid border-gray-100 shadow-[0px_10px_30px_#0000000d] w-full"
+          className="flex flex-col bg-white rounded-2xl overflow-hidden border border-solid border-gray-100 shadow-[0px_10px_30px_#0000000d] w-full card-hover"
         >
           {card.bgImage ? (
             <div
@@ -85,18 +85,18 @@ export const SolutionsGridSection = (): JSX.Element => {
               src={card.imageSrc!}
             />
           )}
-          <div className="flex flex-col p-6 gap-3 flex-1">
-            <h3 className="[font-family:'Inter',Helvetica] font-semibold text-[#111111] text-lg leading-[27px]">
+          <div className="flex flex-col p-5 md:p-6 gap-3 flex-1">
+            <h3 className="[font-family:'Inter',Helvetica] font-semibold text-[#111111] text-base md:text-lg leading-[1.5]">
               {card.title}
             </h3>
-            <p className="[font-family:'Inter',Helvetica] font-normal text-gray-500 text-[15px] leading-6 flex-1">
+            <p className="[font-family:'Inter',Helvetica] font-normal text-gray-500 text-sm md:text-[15px] leading-6 flex-1">
               {card.description}
             </p>
             <button
               type="button"
               className="all-[unset] box-border inline-flex items-center gap-2 cursor-pointer mt-2 hover:opacity-80 transition-opacity"
             >
-              <span className="[font-family:'Inter',Helvetica] font-medium text-blue-600 text-[15px] leading-[22.5px]">
+              <span className="[font-family:'Inter',Helvetica] font-medium text-blue-600 text-sm md:text-[15px] leading-[22.5px]">
                 Learn More
               </span>
               <img

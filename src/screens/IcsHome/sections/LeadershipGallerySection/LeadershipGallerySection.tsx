@@ -192,7 +192,7 @@ const MemberCard = ({ name, role, imgSrc, bgImg }: MemberCardProps) => (
 
 export const LeadershipGallerySection = (): JSX.Element => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 w-full items-stretch">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4 md:gap-5 lg:gap-6 w-full items-stretch">
       {allMembers.map((member, index) => (
         <MemberCard
           key={index}

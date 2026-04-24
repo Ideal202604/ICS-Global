@@ -43,13 +43,7 @@ export const About = (): JSX.Element => {
       {/* ══════════════════════════════════════
           HERO — full-bleed photo, "About Us" centred
           ══════════════════════════════════════ */}
-      <section className="relative w-full" style={{ minHeight: "clamp(340px, 29.2vw, 561px)", height: "clamp(340px, 29.2vw, 561px)" }}>
-        <img
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          alt="About hero background"
-          src="https://c.animaapp.com/mo857b66QKlwSd/img/rectangle-9509.png"
-        />
-
+      <section className="relative w-full" style={{ minHeight: "clamp(300px, 29.2vw, 561px)", height: "clamp(300px, 29.2vw, 561px)" }}>
         {/* ── Navbar ── */}
         <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 md:px-16 lg:px-24 pt-6">
           {/* Logo */}
@@ -181,12 +175,12 @@ export const About = (): JSX.Element => {
         )}
 
         {/* "About Us" centred in hero */}
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 pt-[84px]">
-          <h1 className="[-webkit-text-stroke:1px_#000000] [font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-black text-[36px] md:text-[44px] tracking-[0.88px] leading-[72px] text-center whitespace-nowrap">
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 pt-[72px] md:pt-[84px]">
+          <h1 className="[-webkit-text-stroke:1px_#000000] [font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-black text-[30px] md:text-[44px] tracking-[0.88px] leading-[1.4] text-center whitespace-nowrap">
             About Us
           </h1>
           <img
-            className="w-44 h-1.5"
+            className="w-36 md:w-44 h-1.5"
             alt=""
             aria-hidden="true"
             src="https://c.animaapp.com/mo857b66QKlwSd/img/line.svg"
