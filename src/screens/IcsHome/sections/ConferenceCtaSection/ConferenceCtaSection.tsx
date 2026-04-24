@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export const ConferenceCtaSection = (): JSX.Element => {
+  const navigate = useNavigate();
   return (
     <div className="w-full bg-[#f0f2f5] py-10 md:py-14 lg:py-16 px-4 md:px-8 lg:px-12 flex justify-center">
       {/* Rounded hero card */}
@@ -62,6 +65,7 @@ export const ConferenceCtaSection = (): JSX.Element => {
               {/* Register Now — outlined */}
               <button
                 type="button"
+                onClick={() => navigate("/contact")}
                 className="group inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-md border border-white/70 bg-transparent cursor-pointer hover:bg-white/10 hover:border-white transition-all duration-200"
               >
                 <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-[13px] md:text-[14px] leading-5 whitespace-nowrap">
@@ -75,6 +79,7 @@ export const ConferenceCtaSection = (): JSX.Element => {
               {/* Submit Paper — solid white */}
               <button
                 type="button"
+                onClick={() => navigate("/contact")}
                 className="group inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-md bg-white cursor-pointer hover:bg-gray-100 transition-all duration-200 shadow-sm"
               >
                 <span className="[font-family:'Poppins',Helvetica] font-medium text-[#0D47A1] text-[13px] md:text-[14px] leading-5 whitespace-nowrap">

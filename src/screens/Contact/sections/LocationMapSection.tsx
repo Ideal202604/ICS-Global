@@ -6,7 +6,7 @@ const contactItems = [
     iconSrc: "https://c.animaapp.com/mo9oe40uKob8r6/img/featured-icon.svg",
     iconAlt: "Address icon",
     isAddress: true,
-    href: null,
+    href: "https://www.google.com/maps/place/Idealizeer+Content+Solutions+Private+Limited/@18.5863645,73.7360261,17z/",
   },
   {
     title: "Phone",
@@ -60,8 +60,15 @@ export const LocationMapSection = (): JSX.Element => {
                 ))}
               </div>
               {item.isAddress ? (
-                <address className="not-italic [font-family:'Poppins',Helvetica] font-semibold text-white text-base text-center leading-6 w-full">
-                  {item.value}
+                <address className="not-italic w-full">
+                  <a
+                    href={item.href ?? undefined}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="[font-family:'Poppins',Helvetica] font-semibold text-white text-base text-center leading-6 block w-full hover:opacity-80 transition-opacity"
+                  >
+                    {item.value}
+                  </a>
                 </address>
               ) : (
                 <a

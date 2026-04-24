@@ -18,6 +18,59 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
+## 2026-04-24 — LocationMapSection: make Address card a clickable Google Maps link
+- Added `href` to Address card: `https://www.google.com/maps/place/Idealizeer+...`
+- Wrapped address text in `<a target="_blank">` inside `<address>` tag
+- Phone (`tel:`) and Email (`mailto:`) were already functional — no changes needed there
+- File: `src/screens/Contact/sections/LocationMapSection.tsx`
+
+## 2026-04-24 — Contact hero: forcefully fix excessive gap below Get In Touch
+- Root cause: `minHeight: clamp(340px,29.2vw,561px)` on outer section in `Contact.tsx` — removed
+- `ContactHeroSection`: `height:auto; minHeight:unset; justifyContent:flex-start`; `pb-[24px]`
+- Heading `marginBottom:10px`; subheading `marginBottom:15px`; removed wrapper `gap-4` / stray `mb`
+- Files: `src/screens/Contact/Contact.tsx`, `src/screens/Contact/sections/ContactHeroSection.tsx`
+
+## 2026-04-24 — ICMLBDA 2026: wire Register Now + Submit Paper to /contact
+- Added `useNavigate` from react-router-dom to `ConferenceCtaSection`
+- Both buttons use `onClick={() => navigate("/contact")}` — no UI changes
+- File: `src/screens/IcsHome/sections/ConferenceCtaSection/ConferenceCtaSection.tsx`
+
+## 2026-04-24 — Footer: fully responsive layout for mobile + laptop
+- Switched from flex-wrap to CSS grid: 1-col mobile, 2×2 tablet, 4-col desktop
+- Reduced heading font to 15–17px, body/links to 12.5–14px with `leading-[1.6]` for readability
+- Mobile: center-aligned content; sm+: left-aligned; `break-all` on email to prevent overflow
+- Social icons now in circular `w-8/w-9` touch-targets with bg-white/10 hover ring
+- Removed `whitespace-nowrap` that caused overflow on small screens; tighter padding at all breakpoints
+
+## 2026-04-24 — Contact: WhatsApp integration + desktop size increase
+- Replaced EmailJS submit with WhatsApp deep-link: `wa.me/919890451547?text=...` (opens app on mobile, web on desktop)
+- Message format: greeting + Name/Email/Mobile/Message, encoded via `encodeURIComponent`
+- All fields validated before opening WhatsApp; form resets + success banner shown after
+- Desktop (lg+): larger padding (`lg:p-14`, `lg:p-12`), bigger heading (`lg:text-[38px]`), taller inputs (`lg:py-4`), taller textarea (`lg:min-h-[150px]`), wider image col (`xl:w-[48%]`), more gap (`xl:gap-20`)
+- Mobile layout and all colours/fonts unchanged; removed unused EmailJS imports
+
+## 2026-04-24 — Contact section: responsive layout (desktop two-col, mobile stacked)
+## 2026-04-24 — Contact: WhatsApp integration + desktop size increase
+- Replaced EmailJS submit with WhatsApp deep-link: `wa.me/919890451547?text=...` (opens app on mobile, web on desktop)
+- Message format: greeting + Name/Email/Mobile/Message, encoded via `encodeURIComponent`
+- All fields validated before opening WhatsApp; form resets + success banner shown after
+- Desktop (lg+): larger padding (`lg:p-14`, `lg:p-12`), bigger heading (`lg:text-[38px]`), taller inputs (`lg:py-4`), taller textarea (`lg:min-h-[150px]`), wider image col (`xl:w-[48%]`), more gap (`xl:gap-20`)
+- Mobile layout and all colours/fonts unchanged; removed unused EmailJS imports
+
+## 2026-04-24 — Contact section: responsive layout (desktop two-col, mobile stacked)
+- Desktop (md+): left col = heading + form, right col = image — unchanged from original
+- Mobile (<md): heading → subheading → image → form → submit (vertical stack)
+- Mobile image is `block md:hidden`; desktop image is `hidden md:flex` right column
+- Phone field: full-width, no country-code dropdown on all screen sizes
+- File: `src/components/ContactAndFooter/ContactAndFooter.tsx`
+
+## 2026-04-24 — Contact section: image between heading & form, remove country dropdown (superseded)
+- Moved contact image to sit between the heading/subheading and the form fields (all breakpoints)
+- Removed left/right two-column layout — card is now single-column with image embedded inline
+- Removed country-code flag dropdown; mobile field is now full-width matching all other inputs
+- All pages using `ContactAndFooter` component automatically updated (Home, About, Contact, etc.)
+- File: `src/components/ContactAndFooter/ContactAndFooter.tsx`
+
 ## 2026-04-24 — Reuse About page BlogsAndGuidesSection on Home page
 - Removed inline `HomeBlogsCarousel` (duplicate) from `IcsHome.tsx`
 - Imported and rendered `BlogsAndGuidesSection` from `src/screens/About/sections/BlogsAndGuidesSection.tsx`
