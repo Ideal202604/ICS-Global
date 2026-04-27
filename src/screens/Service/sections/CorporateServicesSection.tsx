@@ -15,6 +15,7 @@ const rightColumnServices = [
 export const CorporateServicesSection = (): JSX.Element => {
   return (
     <section
+      id="section-manufacturing"
       aria-labelledby="manufacturing-title"
       className="w-full bg-gray-50"
     >

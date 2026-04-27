@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const cards = [
   {
     title: "K–12 Education",
@@ -5,6 +7,7 @@ const cards = [
     imageSrc: "https://c.animaapp.com/nj999vRB/img/container.svg",
     bgImage: null,
     overlayIcon: null,
+    anchor: "section-k12",
   },
   {
     title: "Higher Education",
@@ -12,6 +15,7 @@ const cards = [
     imageSrc: null,
     bgImage: "https://c.animaapp.com/nj999vRB/img/image--higher-education-.png",
     overlayIcon: "https://c.animaapp.com/nj999vRB/img/container-1.svg",
+    anchor: "section-higher-education",
   },
   {
     title: "EdTech",
@@ -19,6 +23,7 @@ const cards = [
     imageSrc: "https://c.animaapp.com/nj999vRB/img/container-2.svg",
     bgImage: null,
     overlayIcon: null,
+    anchor: "section-edtech",
   },
   {
     title: "Publishing",
@@ -26,6 +31,7 @@ const cards = [
     imageSrc: "https://c.animaapp.com/nj999vRB/img/container-3.svg",
     bgImage: null,
     overlayIcon: null,
+    anchor: "section-publishing",
   },
   {
     title: "Corporate",
@@ -33,6 +39,7 @@ const cards = [
     imageSrc: null,
     bgImage: "https://c.animaapp.com/nj999vRB/img/image--corporate-.png",
     overlayIcon: "https://c.animaapp.com/nj999vRB/img/container-4.svg",
+    anchor: "section-corporate",
   },
   {
     title: "Manufacturing",
@@ -40,6 +47,7 @@ const cards = [
     imageSrc: "https://c.animaapp.com/nj999vRB/img/container-5.svg",
     bgImage: null,
     overlayIcon: null,
+    anchor: "section-manufacturing",
   },
   {
     title: "IT & ITeS",
@@ -47,6 +55,7 @@ const cards = [
     imageSrc: "https://c.animaapp.com/nj999vRB/img/container-6.svg",
     bgImage: null,
     overlayIcon: null,
+    anchor: "section-it-ites",
   },
   {
     title: "Branding & Marketing",
@@ -54,10 +63,26 @@ const cards = [
     imageSrc: "https://c.animaapp.com/nj999vRB/img/container-7.svg",
     bgImage: null,
     overlayIcon: null,
+    anchor: "section-branding",
   },
 ];
 
 export const SolutionsGridSection = (): JSX.Element => {
+  const navigate = useNavigate();
+
+  const handleLearnMore = (anchor: string) => {
+    navigate(`/services#${anchor}`);
+    // After navigation, scroll to the target element with a small delay
+    setTimeout(() => {
+      const el = document.getElementById(anchor);
+      if (el) {
+        const offset = 80; // navbar height offset
+        const top = el.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    }, 150);
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 w-full">
       {cards.map((card, index) => (
@@ -94,6 +119,7 @@ export const SolutionsGridSection = (): JSX.Element => {
             </p>
             <button
               type="button"
+              onClick={() => handleLearnMore(card.anchor)}
               className="all-[unset] box-border inline-flex items-center gap-2 cursor-pointer mt-2 hover:opacity-80 transition-opacity"
             >
               <span className="[font-family:'Inter',Helvetica] font-medium text-blue-600 text-sm md:text-[15px] leading-[22.5px]">

@@ -18,15 +18,33 @@ You MUST maintain this file to track your work across messages. This is NON-NEGO
 </instructions>
 
 <changelog>
-## 2026-04-24 — Why ICS Global: heading 48px, list items text-xl
-- Heading: → `text-[36px] md:text-[48px]`; list items: → `text-lg md:text-xl`
-- File: `src/screens/Service/sections/BrandingMarketingSection.tsx`
+## 2026-04-27 — Bring About Us back into hero section, remove separate blue section
+- Removed standalone `<section id="about">` with hard-coded blue gradient background
+- Both desktop (`hidden lg:flex`) and mobile (`lg:hidden`) About blocks re-placed inside `<section id="home">` (hero)
+- Hero CTA `pb` set to `0`; About blocks use `marginTop: clamp(80px,12vw,160px)` + `paddingBottom` to push below first viewport
+- Same iceberg background is continuous — zero color or background break between hero and About
+- File: `src/screens/IcsHome/IcsHome.tsx`
 
-## 2026-04-24 — Remove rectangle-9509 background image from all hero sections
-- Removed `rectangle-9509.png` from `About.tsx` hero (was the sole background layer)
-- Removed `rectangle-9509.png` from `Blog.tsx` hero (was first of three stacked bg layers)
-- Removed `rectangle-9509.png` from `Conference.tsx` hero (was the sole background layer)
-- Image was NOT present in Service.tsx or Gallery.tsx (already confirmed)
+## 2026-04-27 — Wire "Learn More" buttons in SolutionsGridSection to /services page
+- Added `anchor` field to each card in `SolutionsGridSection` mapping to section IDs on `/services`
+- Added `id` attributes to outer `<section>` of all 8 service sections (e.g. `section-k12`, `section-branding`)
+- `handleLearnMore` uses `useNavigate` + `setTimeout` scroll-to-element with 80px navbar offset
+- No UI/design changes — purely navigation functionality
+- Files: `SolutionsGridSection.tsx` + all 8 `src/screens/Service/sections/*.tsx`
+
+## 2026-04-27 — Fix Conference page nav order
+- Corrected inline `navItems` in `Conference.tsx`: Blog and Gallery were before Conference
+- Order is now: Home → About → Services → Blog → Gallery → Conference (matches all other pages)
+- File: `src/screens/Conference/Conference.tsx`
+
+## 2026-04-24 — Fix ScrollToTopButton.tsx build error
+- File had stray `</action>` tag leaked from a prior truncated response causing SyntaxError at line 74
+- Rewrote file with `write_to_file` to restore clean, complete component code
+- File: `src/components/ScrollToTopButton.tsx`
+
+## 2026-04-24 — Increase "Why ICS Global" heading font size
+- Changed from `text-[32px] md:text-[44px]` → `text-[42px] md:text-[58px] lg:text-[68px]`
+- File: `src/screens/Service/sections/BrandingMarketingSection.tsx`
 
 ## 2026-04-24 — Global ScrollToTop button wired across all pages
 - Rebuilt `ScrollToTopButton.tsx` with useState/useEffect scroll listener, smooth scroll on click

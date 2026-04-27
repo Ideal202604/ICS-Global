@@ -172,9 +172,7 @@ export const IcsHome = (): JSX.Element => {
         )}
 
         {/* ── Hero text content ── */}
-        <div
-          className="relative z-10 flex flex-col items-center text-center px-4 pt-[clamp(60px,10vw,180px)] pb-[clamp(48px,6vw,120px)]"
-        >
+        <div className="relative z-10 flex flex-col items-center text-center px-4 pt-[clamp(60px,10vw,180px)] pb-0">
           <div className="flex flex-col items-center gap-5 md:gap-6 max-w-[768px] mx-auto">
             {/* Heading */}
             <div className="relative w-full">
@@ -212,51 +210,45 @@ export const IcsHome = (): JSX.Element => {
           </div>
         </div>
 
-        {/* ── About section — DESKTOP ONLY (lg+): bottom-right of hero ── */}
+        {/* ── About Us — pushed below first viewport, same hero background ── */}
+        {/* Desktop (lg+): right-aligned layout */}
         <div
           id="about"
-          className="hidden lg:block relative z-10 w-full"
-          style={{ paddingBottom: "clamp(48px, 6.25vw, 120px)" }}
+          className="hidden lg:flex justify-end relative z-10 px-6 md:px-16 lg:px-24"
+          style={{ marginTop: "clamp(80px, 12vw, 160px)", paddingBottom: "clamp(80px, 10vw, 160px)" }}
         >
-          <div
-            className="flex justify-end px-6 md:px-16 lg:px-24"
-          >
-            <div className="flex flex-col items-start gap-5 max-w-[600px] xl:max-w-[660px]">
-              <div className="flex flex-col items-start gap-2">
-                <p className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6">
-                  About Us
-                </p>
-                <h2 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-[clamp(32px,2.9vw,56px)] tracking-[0.88px] leading-[1.2]">
-                  Welcome To<br />ICS GLOBAL
-                </h2>
-              </div>
-              <p className="[font-family:'Poppins',Helvetica] font-normal text-base lg:text-lg leading-7">
-                <span className="text-[#eeeeee]">Idealizeer Content Solutions Private Limited (ICS Global) is an AI-enabled ecosystem driving{" "}</span>
-                <span className="font-medium text-white">quality education, community development, and sustainable institutional growth</span>
-                <span className="text-[#eeeeee]">{" "}for a rapidly evolving world. At ICS Global, we believe that the future of institutions lies at the intersection of human insight and artificial intelligence. Founded a decade ago, we operate at the intersection of education, industry, and technology — co-creating learning experiences that prepare learners for tomorrow&#39;s opportunities while advancing each partner university&#39;s strategic vision.</span>
+          <div className="flex flex-col items-start gap-5 max-w-[600px] xl:max-w-[660px]">
+            <div className="flex flex-col items-start gap-2">
+              <p className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6">
+                About Us
               </p>
-              <button
-                type="button"
-                onClick={() => navigate("/about")}
-                className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-3.5 py-3 bg-primary-1 rounded-lg overflow-hidden border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
-              >
-                <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
-                  Partner for Transformation
-                </span>
-                <img className="w-5 h-5" alt="" aria-hidden="true" src="https://c.animaapp.com/mo9jwd9rECorqJ/img/arrow-up-left.svg" />
-              </button>
+              <h2 className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-white text-[clamp(32px,2.9vw,56px)] tracking-[0.88px] leading-[1.2]">
+                Welcome To<br />ICS GLOBAL
+              </h2>
             </div>
+            <p className="[font-family:'Poppins',Helvetica] font-normal text-base lg:text-lg leading-7">
+              <span className="text-[#eeeeee]">Idealizeer Content Solutions Private Limited (ICS Global) is an AI-enabled ecosystem driving{" "}</span>
+              <span className="font-medium text-white">quality education, community development, and sustainable institutional growth</span>
+              <span className="text-[#eeeeee]">{" "}for a rapidly evolving world. At ICS Global, we believe that the future of institutions lies at the intersection of human insight and artificial intelligence. Founded a decade ago, we operate at the intersection of education, industry, and technology — co-creating learning experiences that prepare learners for tomorrow&#39;s opportunities while advancing each partner university&#39;s strategic vision.</span>
+            </p>
+            <button
+              type="button"
+              onClick={() => navigate("/about")}
+              className="all-[unset] box-border inline-flex items-center justify-center gap-2 px-3.5 py-3 bg-primary-1 rounded-lg overflow-hidden border border-solid border-white cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-base leading-6 whitespace-nowrap">
+                Partner for Transformation
+              </span>
+              <img className="w-5 h-5" alt="" aria-hidden="true" src="https://c.animaapp.com/mo9jwd9rECorqJ/img/arrow-up-left.svg" />
+            </button>
           </div>
         </div>
-      </section>
 
-      {/* ── About section — MOBILE / TABLET only ── */}
-      <section
-        id="about-mobile"
-        className="lg:hidden w-full px-6 md:px-16 py-10 md:py-14"
-        style={{ background: "linear-gradient(160deg, #0e2a47 0%, #1a4f72 100%)" }}
-      >
-        <div className="flex flex-col items-start gap-5 max-w-2xl mx-auto">
+        {/* Mobile / tablet: full-width stacked layout, still inside hero */}
+        <div
+          className="lg:hidden flex flex-col items-start gap-5 relative z-10 px-6 md:px-16 max-w-2xl"
+          style={{ marginTop: "clamp(60px, 10vw, 120px)", paddingBottom: "clamp(60px, 10vw, 120px)" }}
+        >
           <div className="flex flex-col items-start gap-2">
             <p className="[font-family:'Poppins',Helvetica] font-medium text-white text-sm leading-6">
               About Us
@@ -281,6 +273,7 @@ export const IcsHome = (): JSX.Element => {
             <img className="w-5 h-5" alt="" aria-hidden="true" src="https://c.animaapp.com/mo9jwd9rECorqJ/img/arrow-up-left.svg" />
           </button>
         </div>
+
       </section>
 
       {/* ══════════════════════════════════════

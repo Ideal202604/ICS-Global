@@ -16,6 +16,7 @@ const serviceColumns = [
 export const K12EducationSection = (): JSX.Element => {
   return (
     <section
+      id="section-higher-education"
       aria-labelledby="higher-education-heading"
       className="w-full bg-gray-50"
     >

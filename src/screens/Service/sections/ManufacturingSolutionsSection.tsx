@@ -16,6 +16,7 @@ const serviceColumns = [
 export const ManufacturingSolutionsSection = (): JSX.Element => {
   return (
     <section
+      id="section-it-ites"
       aria-labelledby="it-ites-title"
       className="w-full"
     >

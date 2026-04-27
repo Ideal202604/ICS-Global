@@ -6,9 +6,9 @@ const navItems = [
   { label: "Home", path: "/" },
   { label: "About", path: "/about" },
   { label: "Services", path: "/services" },
-  { label: "Conference", path: "/conference" },
   { label: "Blog", path: "/blog" },
   { label: "Gallery", path: "/gallery" },
+  { label: "Conference", path: "/conference" },
 ] as const;
 
 export const Conference = (): JSX.Element => {
@@ -20,6 +20,13 @@ export const Conference = (): JSX.Element => {
 
       {/* ── HERO ── */}
       <section className="relative w-full" style={{ minHeight: "clamp(300px, 29.2vw, 561px)", height: "clamp(300px, 29.2vw, 561px)" }}>
+        <img
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          alt=""
+          aria-hidden="true"
+          src="https://c.animaapp.com/mo857b66QKlwSd/img/rectangle-9509.png"
+        />
+
         {/* Navbar */}
         <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between px-6 md:px-16 lg:px-24 pt-6">
           <button

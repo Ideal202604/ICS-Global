@@ -12,6 +12,7 @@ const sectionContent = {
 export const PublishingHousesSection = (): JSX.Element => {
   return (
     <section
+      id="section-corporate"
       aria-labelledby="corporate-title"
       className="w-full"
     >

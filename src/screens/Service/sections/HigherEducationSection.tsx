@@ -15,6 +15,7 @@ const servicesRight = [
 export const HigherEducationSection = (): JSX.Element => {
   return (
     <section
+      id="section-edtech"
       aria-labelledby="ed-tech-sector-heading"
       className="w-full"
     >

@@ -44,23 +44,23 @@ export const BrandingMarketingSection = (): JSX.Element => {
             />
           </div>
           {/* Right: Why ICS Global */}
-          <div className="w-full lg:w-1/2 flex flex-col items-start justify-center gap-6">
+          <div className="w-full lg:w-1/2 flex flex-col items-start gap-8">
             <h2
               id="why-ics-global-title"
-              className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-black text-[36px] md:text-[48px] tracking-[0.56px] leading-tight"
+              className="[font-family:'Belgiano_Serif-Regular',Helvetica] font-normal text-black text-[42px] md:text-[58px] lg:text-[68px] tracking-[0.88px] leading-[1.2]"
             >
               Why ICS Global
             </h2>
-            <ul className="flex flex-col items-start gap-3 list-none m-0 p-0 w-full">
+            <ul className="flex flex-col items-start gap-4 list-none m-0 p-0 w-full">
               {whyItems.map((item) => (
-                <li key={item.id} className="flex items-center gap-4 py-1.5 px-2 w-full">
+                <li key={item.id} className="flex items-center gap-6 p-2.5 w-full">
                   <img
-                    className="w-6 h-6 flex-shrink-0"
+                    className="w-8 h-8 flex-shrink-0"
                     alt=""
                     aria-hidden="true"
                     src={item.icon}
                   />
-                  <p className="[font-family:'Poppins',Helvetica] font-normal text-primary-4 text-lg md:text-xl tracking-[0.32px] leading-[1.6]">
+                  <p className="[font-family:'Poppins',Helvetica] font-normal text-primary-4 text-xl md:text-[28px] tracking-[0.64px] leading-[42px]">
                     {item.text}
                   </p>
                 </li>

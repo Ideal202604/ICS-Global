@@ -15,6 +15,7 @@ const servicesColumnTwo = [
 export const SignatureOfferingsIntroSection = (): JSX.Element => {
   return (
     <section
+      id="section-k12"
       aria-labelledby="k12-heading"
       className="w-full max-w-[1728px] mx-auto px-4 md:px-8 lg:px-24 py-12 md:py-16"
     >
